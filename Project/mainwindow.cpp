@@ -29,11 +29,11 @@ void MainWindow::on_pushButton_clicked()
     {
         QString text = in.readLine();
         QStringList fields = text.split( ";" );
-        ui->textEdit->setPlainText(fields[0]);
-        ui->textEdit_2->setPlainText(fields[1]);
-        ui->textEdit_3->setPlainText(fields[2]);
-        ui->textEdit_5->setPlainText(fields[3]);
-        ui->textEdit_4->setPlainText(fields[4]);
+        ui->textEdit->append(fields[0]);
+        ui->textEdit_2->append(fields[1]);
+        ui->textEdit_3->append(fields[2]);
+        ui->textEdit_5->append(fields[3]);
+        ui->textEdit_4->append(fields[4]);
     }
 
     file.close();
