@@ -1,5 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include<QPainter>
 #include<QFile>
 #include<QTextStream>
 #include <QMainWindow>
@@ -15,13 +16,16 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    virtual void paintEvent(QPaintEvent *event);
 
 private slots:
-    void on_pushButton_3_clicked();
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
-    int count;
+    int count=0;
     QVector<QStringList> ins;
 };
 #endif // MAINWINDOW_H
