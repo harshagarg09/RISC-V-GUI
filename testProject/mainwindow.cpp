@@ -32,39 +32,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
-   /* QPainter myline(this);
-    myline.drawLine(50,50,200,200);
-    QPainter register_file(this);
-    QPen pen;
-    pen.setColor(Qt::blue);
-    register_file.setPen(pen);
-    register_file.drawRect(200,300,150,150);
-    QPainter RA(this);
-    RA.setPen(pen);
-    RA.drawRect(450,400,50,50);
-    QPainter RB(this);
-    RB.setPen(pen);
-    RB.drawRect(450,150,50,50);
-    QPainter MuxA(this);
-    MuxA.drawRect(600,400,50,150);
-    QPainter MuxB(this);
-    MuxB.drawRect(600,100,50,200);
-    QPainter ALU(this);
-    ALU.setPen(pen);
-    ALU.drawRect(800,250,100,250);
-    QPainter RZ(this);
-    RZ.setPen(pen);
-    RZ.drawRect(1000,350,50,50);
-    QPainter RM(this);
-    RM.setPen(pen);
-    RM.drawRect(1000,50,50,50);
-    QPainter MuxY(this);
-    MuxY.drawRect(1200,300,50,150);
-    QPainter MuxM(this);
-    MuxM.drawRect(1200,25,50,150);
-    QPainter RY(this);
-    RY.setPen(pen);
-    RY.drawRect(1300,350,50,50);*/
+   
 }
 
 void MainWindow::on_pushButton_2_clicked()
