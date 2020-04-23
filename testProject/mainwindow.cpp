@@ -28,21 +28,6 @@ void MainWindow::on_pushButton_clicked()
         file.close();
         QMessageBox::information(this,"title","Code executed successfully!!");
 
-  /*      QString  command( "pushd" );
-        QStringList params = QStringList() << "C:\Users\hp\Documents\newvenus\ca";
-        QProcess::startDetached( command, params );
-
-        QProcess process;
-        process.start("pushd", QStringList() << "Documents\newvenus\ca");
-       // QProcess::execute("pushd", QStringList() <<"C:\Users\hp\Documents\newvenus\CA_RISCV_PROJECT");
-        //QProcess::execute("g++ main.cpp");
-        QProcess process2;
-        process2.start("g++", QStringList() << "main.cpp");
-        QProcess process3;
-        process3.start("./a.out", QStringxx2List() );
-        QMessageBox::information(this,"title","Code executed successfully!!");
-*/
-
 }
 
 void MainWindow::paintEvent(QPaintEvent *event)
