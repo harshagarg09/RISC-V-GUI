@@ -1,0 +1,3 @@
+addi x0,x1,1; add x0,x2,x11; sub x4,x10,x14 ;; lw x1,0(x2)
+sw x10, 0(x11);addi x0,x1,1; C:add x0,x2,x11; sub x4,x10,x14 ;
+jal x1,loop;sw x10, 0(x11);addi x0,x1,1; add x0,x2,x11; sub x4,x10,x14
