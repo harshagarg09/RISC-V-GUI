@@ -223,7 +223,7 @@ int main(){
 					cin>>k;
 				}
 			}
-			fetch.get(isb,rFile,/*i*/);
+			fetch.get(isb,rFile);
 			if(isb.IR.readInt() == 0 || k == 'e' || k == 'E')
 				break;
 
@@ -259,7 +259,7 @@ int main(){
 			
 			if(i==1){
 				if(!end){
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
 				}
@@ -277,7 +277,7 @@ int main(){
 					if(isb.hazard_type == 2){
 						iag.jumpPC(isb, isb.branch_address);
 					}
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					updateISB(isb);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
@@ -297,7 +297,7 @@ int main(){
 					if(isb.hazard_type == 2){
 						iag.jumpPC(isb, isb.branch_address);
 					}
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					updateISB(isb);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
@@ -318,7 +318,7 @@ int main(){
 					if(isb.hazard_type == 2){
 						iag.jumpPC(isb, isb.branch_address);
 					}
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					updateISB(isb);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
@@ -340,7 +340,7 @@ int main(){
 					if(isb.hazard_type == 2){
 						iag.jumpPC(isb, isb.branch_address);
 					}
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					updateISB(isb);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
@@ -373,7 +373,7 @@ int main(){
 			
 			if(i==1){
 				if(!end){
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
 				}
@@ -391,7 +391,7 @@ int main(){
 					if(isb.hazard_type == 2){
 						iag.jumpPC(isb, isb.branch_address);
 					}
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					updateISB(isb);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
@@ -411,7 +411,7 @@ int main(){
 					if(isb.hazard_type == 2){
 						iag.jumpPC(isb, isb.branch_address);
 					}
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					updateISB(isb);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
@@ -432,7 +432,7 @@ int main(){
 					if(isb.hazard_type == 2){
 						iag.jumpPC(isb, isb.branch_address);
 					}
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					updateISB(isb);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
@@ -454,7 +454,7 @@ int main(){
 					if(isb.hazard_type == 2){
 						iag.jumpPC(isb, isb.branch_address);
 					}
-					fetch.get(isb,rFile,/*i*/);
+					fetch.get(isb,rFile);
 					updateISB(isb);
 					if(!isb.hazard_type) iag.update(isb);
 					else iag.jumpPC(isb,isb.branch_address);
@@ -562,11 +562,6 @@ void updateISB(InterStateBuffers &isb){
 	isb.insTypeM = isb.insTypeE;
 	isb.insTypeE = isb.insTypeD;
 	isb.insTypeD = isb.insType;
-	
-	isb.instructionW = isb.instructionM;
-	isb.instructionM = isb.instructionE;
-	isb.instructionE = isb.instructionD;
-	isb.instructionD = isb.instruction;
 
 	isb.isjalrW = isb.isjalrM;
 	isb.isjalrM = isb.isjalrE;
@@ -611,8 +606,6 @@ void updateIfStall(InterStateBuffers &isb){
 	isb.wblocE = -1;		 
 	isb.insTypeW = isb.insTypeM;
 	isb.insTypeM = isb.insTypeE;
-	isb.instructionW = isb.instructionM;
-	isb.instructionM = isb.instructionE;
 	isb.returnAddW = isb.returnAddM;
 	isb.returnAddM = isb.returnAddE;
 	isb.isjalrW = isb.isjalrM;
