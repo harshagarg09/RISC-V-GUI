@@ -33,6 +33,7 @@ class Fetch {
 		map <int , bitset <REG_WIDTH> > mem_map;
 		InterStateBuffers * buf;
 		map <int , int> itype_map;
+		map <int,string> ins_map;
 
 		int hazardType;
 		bitset <REG_WIDTH > branch_address;
@@ -132,6 +133,14 @@ class Fetch {
 			mem_map[atoi(lineNo.c_str())] = bitset;
 			itype_map[atoi(lineNo.c_str())] = atoi (type.c_str());
 		}
+		ifstream ifile("basicCode.txt");
+		string ins;
+		int i=1;
+		while(getline (ifile , ins ) ){
+			ins_map[i] = ins;
+			i++;
+		}
+		
 		
 	}
 	
