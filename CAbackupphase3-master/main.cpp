@@ -562,6 +562,11 @@ void updateISB(InterStateBuffers &isb){
 	isb.insTypeM = isb.insTypeE;
 	isb.insTypeE = isb.insTypeD;
 	isb.insTypeD = isb.insType;
+	
+	isb.instructionW = isb.instructionM;
+	isb.instructionM = isb.instructionE;
+	isb.instructionE = isb.instructionD;
+	isb.instructionD = isb.instruction;
 
 	isb.isjalrW = isb.isjalrM;
 	isb.isjalrM = isb.isjalrE;
@@ -606,6 +611,8 @@ void updateIfStall(InterStateBuffers &isb){
 	isb.wblocE = -1;		 
 	isb.insTypeW = isb.insTypeM;
 	isb.insTypeM = isb.insTypeE;
+	isb.instructionW = isb.instructionM;
+	isb.instructionM = isb.instructionE;
 	isb.returnAddW = isb.returnAddM;
 	isb.returnAddM = isb.returnAddE;
 	isb.isjalrW = isb.isjalrM;
