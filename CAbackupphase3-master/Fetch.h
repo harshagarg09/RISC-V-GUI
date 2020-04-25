@@ -163,7 +163,7 @@ class Fetch {
                 string pcNo, hexmc;
                 stringstream ss (line);
                 //ss >>pcNo>> hexmc;
-                oFile<<ss<<";";
+                oFile<<line<<";";
                 //cout<<"\t\tFetch Instruction "<<hexmc<<" from address "<<pcNo<<endl;
                 pFile.close();
                 oFile.close();
