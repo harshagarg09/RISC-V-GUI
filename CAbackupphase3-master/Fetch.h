@@ -11,7 +11,6 @@
 
 // TODO 
 #define MEM_SRC "machineCode.txt"
-//#define HMEM_SRC "basicCode.txt"//basic code.txt
 #define REG_WIDTH 32
 
 using namespace std;
@@ -33,7 +32,6 @@ class Fetch {
 		map <int , bitset <REG_WIDTH> > mem_map;
 		InterStateBuffers * buf;
 		map <int , int> itype_map;
-		//map <int,string> ins_map;
 
 		int hazardType;
 		bitset <REG_WIDTH > branch_address;
@@ -133,15 +131,7 @@ class Fetch {
 			mem_map[atoi(lineNo.c_str())] = bitset;
 			itype_map[atoi(lineNo.c_str())] = atoi (type.c_str());
 		}
-	/*	ifstream ifile("basicCode.txt");
-		string ins;
-		int i=1;
-		while(getline (ifile , ins ) ){
-			ins_map[i] = ins;
-			i++;
-		}
 		
-		*/
 	}
 	
 	void updateBuffer(InterStateBuffers & buf) {
@@ -151,17 +141,16 @@ class Fetch {
 
 	}
 
-	void get(InterStateBuffers & buf, Registry_File regs/*,int i*/) {
+	void get(InterStateBuffers & buf, Registry_File regs,int i) {
 		buf.IR.writeBitset ( mem_map[buf.PC]);
 		buf.insType = itype_map[ buf.PC ]; // Instype and new intructions fetch completed
-	//	buf.instruction = ins_map[ buf.PC ];
 		
 		if (buf.enablePipe) {
 			hazardType = detectControlHazards(buf);
 			setBrachAddress(buf, regs);
 			updateBuffer(buf);	
 		}
-		/*ifstream pFile (HMEM_SRC);
+ifstream pFile ("basicCode.txt");
         string print_file_name = "printsummary.txt";
         ofstream oFile(print_file_name.c_str(),ios::app);
         
@@ -170,11 +159,11 @@ class Fetch {
         while(getline (pFile , line ) ){
             if(pp==i)
             {
-                string pcNo, hexmc;
-                stringstream ss (line);
-                //ss >>pcNo>> hexmc;
-                oFile<<line<<";";
-                //cout<<"\t\tFetch Instruction "<<hexmc<<" from address "<<pcNo<<endl;
+                string pcname;
+                //stringstream ss (line);
+               // ss >>pcNo>> hexmc;
+               // oFile<<"Fetch Instruction "<<hexmc<<" from address "<<pcNo<<endl;
+oFile<<line<<",";
                 pFile.close();
                 oFile.close();
                 pp++;
@@ -182,7 +171,7 @@ class Fetch {
             }
             else
                 pp++;
-        }*/
+        }
 	}
 
 };
