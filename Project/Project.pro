@@ -20,6 +20,24 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    ../CA_RISCV_PROJECT-working/InterStateBuffers.h \
+    ALU.h \
+    Assembler.h \
+    Decode.h \
+    Fetch.h \
+    Functions.h \
+    IAG.h \
+    IType.h \
+    InterStateBuffers.h \
+    MUX_Y.h \
+    MemoryAccess.h \
+    RType.h \
+    RegUpdate.h \
+    RegistryFile.h \
+    SBType.h \
+    SType.h \
+    UJType.h \
+    UType.h \
     mainwindow.h
 
 FORMS += \
@@ -29,3 +47,14 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    ALU.txt \
+    Memory.txt \
+    input.txt \
+    instruction/IType.txt \
+    instruction/RType.txt \
+    instruction/SBType.txt \
+    instruction/SType.txt \
+    instruction/UJType.txt \
+    instruction/UType.txt
