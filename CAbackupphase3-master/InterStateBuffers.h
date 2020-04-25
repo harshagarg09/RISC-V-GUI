@@ -44,7 +44,6 @@ class InterStateBuffers{
 		Register IR;
 		int pc_offset;
 		int insType;
-		//string instruction;
 		string ALU_OP;
 		bool isjalr, isMem;
 
@@ -59,7 +58,6 @@ class InterStateBuffers{
 		int branch_address;
 
 		int insTypeD,insTypeE,insTypeM,insTypeW;
-		//string instructionD,instructionE,instructionM,instructionW;
 		int isjalrD,isjalrE,isjalrM,isjalrW;
 		int wblocD,wblocE,wblocM,wblocW;
 		int isMemD,isMemE,isMemM,isMemW;
@@ -76,7 +74,14 @@ class InterStateBuffers{
     	string pInst;      // instruction
     	string ppInst;     //
 
-		
+		// int coldmiss;
+		// int hitcount;
+		// int accesscount;
+		// int conflict_misses_data;
+		// int cold_misses_data;
+		// int capacity_misses_data;
+		// int accesses_data;
+		// int hits_data;
 
 		//Write back location:- stores register number for writeback, 
 		//-1 for SB type where no write back occurs.
@@ -133,11 +138,6 @@ class InterStateBuffers{
 			insTypeM = -1;
 			insTypeE = -1;
 			insTypeD = -1;
-			
-			/*instructionW =""; 
-			instructionM ="";
-			instructionE ="";
-			instructionD ="";*/
 
 			isjalrW = 0;
 			isjalrM = 0;
