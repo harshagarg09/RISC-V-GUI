@@ -11,6 +11,7 @@
 
 // TODO 
 #define MEM_SRC "machineCode.txt"
+//#define HMEM_SRC "basicCode.txt"//basic code.txt
 #define REG_WIDTH 32
 
 using namespace std;
@@ -141,7 +142,7 @@ class Fetch {
 
 	}
 
-	void get(InterStateBuffers & buf, Registry_File regs) {
+	void get(InterStateBuffers & buf, Registry_File regs/*,int i*/) {
 		buf.IR.writeBitset ( mem_map[buf.PC]);
 		buf.insType = itype_map[ buf.PC ]; // Instype and new intructions fetch completed
 		
@@ -150,6 +151,28 @@ class Fetch {
 			setBrachAddress(buf, regs);
 			updateBuffer(buf);	
 		}
+		/*ifstream pFile (HMEM_SRC);
+        string print_file_name = "printsummary.txt";
+        ofstream oFile(print_file_name.c_str(),ios::app);
+        
+        string line;
+        int pp=0;
+        while(getline (pFile , line ) ){
+            if(pp==i)
+            {
+                string pcNo, hexmc;
+                stringstream ss (line);
+                //ss >>pcNo>> hexmc;
+                oFile<<ss<<";";
+                //cout<<"\t\tFetch Instruction "<<hexmc<<" from address "<<pcNo<<endl;
+                pFile.close();
+                oFile.close();
+                pp++;
+                break;
+            }
+            else
+                pp++;
+        }*/
 	}
 
 };
