@@ -63,7 +63,7 @@ class SBType {
 
     // initialise the vectors with their respective values from the input file.
     void initialise (string filename) {
-        ifstream ifile(filename.c_str());
+        ifstream ifile("C:/Users/K.m.C/Documents/Project/instruction/SBType.txt");
         string line;
         while(getline(ifile,line)) {
             stringstream ss(line);

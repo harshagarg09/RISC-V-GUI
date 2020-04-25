@@ -39,8 +39,8 @@ vector <int> extractint(string str) { // recieves a string and extracts all the 
 
 void  assembler_initiate(MemoryAccess &memobject)
 {
-    ifstream ifile("input.txt");
-    ofstream ofile("input1.txt",ios::out);
+    ifstream ifile("C:/Users/K.m.C/Documents/Project/input.txt", ios :: in);
+    ofstream ofile("C:/Users/K.m.C/Documents/Project/input1.txt",ios::out);
     string current;
      // matches the label to address in the memory or value it is referring to.
     map <string , int > labelLookup;

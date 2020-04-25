@@ -37,7 +37,7 @@ class Decode{
 
     // initialising function
     void initialise() {
-        ifstream ifile("ALU.txt");
+        ifstream ifile("C:/Users/K.m.C/Documents/Project/ALU.txt");
         string line,temp;
 
         while(getline(ifile,line))

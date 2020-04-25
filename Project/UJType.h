@@ -26,7 +26,7 @@ class UJType{
 };
 
 void UJType::initialise (string filename) {
-    ifstream ifile(filename.c_str());
+    ifstream ifile("C:/Users/K.m.C/Documents/Project/instruction/UJType.txt");
   string instName,instOpcode;
   while(ifile >> instName >> instOpcode) {
     instructions.push_back(instName);

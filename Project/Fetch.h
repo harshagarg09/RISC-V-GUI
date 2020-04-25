@@ -4,6 +4,7 @@
 #include "InterStateBuffers.h"
 
 #include "Functions.h"
+#include "RegistryFile.h"
 #include <bitset>
 #include <map>
 #include <fstream>
@@ -124,7 +125,7 @@ class Fetch {
 
 
     Fetch(int n = 16) {
-        ifstream inpFile (MEM_SRC);
+        ifstream inpFile ("C:/Users/K.m.C/Documents/Project/machineCode.txt");
         string line;
 
         while(getline (inpFile , line ) ){
@@ -135,7 +136,7 @@ class Fetch {
             mem_map[atoi(lineNo.c_str())] = bitset;
             itype_map[atoi(lineNo.c_str())] = atoi (type.c_str());
         }
-        ifstream ifile("basicCode.txt");
+        ifstream ifile("C:/Users/K.m.C/Documents/Project/basicCode.txt");
         string ins;
         int i=1;
         while(getline (ifile , ins ) ){

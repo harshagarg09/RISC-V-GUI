@@ -23,6 +23,8 @@
 #include"InterStateBuffers.h"
 #include"Assembler.h"
 #include<string>
+#include<Qfile>
+#include<QTextStream>
 
 using namespace std;
 
@@ -73,16 +75,18 @@ int main(int argc, char *argv[])
 
         assembler_initiate(memAccess);
 
-        ifstream iFile(inputFileName.c_str(), ios :: in);
-        ofstream oFile(outputFileName.c_str());
-        ofstream oFile2(basicCodeFileName.c_str());
+       // QFile ifile("C:/Users/K.m.C/Documents/Project/input.txt");
+        ifstream iFile("C:/Users/K.m.C/Documents/Project/input1.txt", ios :: in);
+        ofstream oFile("C:/Users/K.m.C/Documents/Project/machineCode.txt");
+        ofstream oFile2("C:/Users/K.m.C/Documents/Project/basicCode.txt");
 
         cout<<"\n::::::::::  RISC V SIMULATOR :::::::::::::\n\n"<<endl;
 
         //Find All Labels in the input file
         findLabels(inputFileName,labelNames,labelLineNumber);
 
-        if(!iFile.is_open()) cout<<"Error in reading input file";
+        if(!iFile.is_open())
+            cout<<"Error in reading input file";
         else{
             bitset<32> machineCode;
             string line;
@@ -140,6 +144,7 @@ int main(int argc, char *argv[])
                     insType = 6;
                 }
                 else {
+                    cout<<"Hello\n";
                     cout<<"ERROR !! Instuction not identified : "<<line<<endl;
                     machineCode = bitset<32>(0);
                     insType = -1;
@@ -172,17 +177,19 @@ int main(int argc, char *argv[])
         int ch;
         bool runStepByStep = false;
        // cin>>ch;
-        ch=2;
+        ch=3;
         if(ch ==1){
             isb.enablePipe = false;
             cout<<" Show register value after every cycle ? (y/n)  ";
             char c;
-            cin>>c;
+            //cin>>c;
+            c='y';
             if(c=='y'||c=='Y') isb.printRegFile = true;
             else isb.printRegFile = false;
             isb.printISB = false;
             cout<<" Run step by step ? (y/n)  ";
-            cin>>c;
+            //cin>>c;
+            c='y';
             if(c=='y'||c=='Y') runStepByStep = true;
             else runStepByStep = false;
         }
@@ -206,11 +213,13 @@ int main(int argc, char *argv[])
             isb.enableDF = true;
             char c;
             cout<<" Show register value after every cycle ? (y/n)  ";
-            cin>>c;
+            //cin>>c;
+            c='y';
             if(c=='y'||c=='Y') isb.printRegFile = true;
             else isb.printRegFile = false;
             cout<<" Show inter state buffer values after every cycle ? (y/n)  ";
-            cin>>c;
+            c='y';
+           // cin>>c;
             if(c=='y'||c=='Y') isb.printISB = true;
             else isb.printISB = false;
         }
@@ -226,7 +235,8 @@ int main(int argc, char *argv[])
                     k = 'n';
                     while(k != 'r' && k != 'R'){
                         cout<<"\n RUN CYCLE NUMBER : "<<i<<" ? "<<" ( enter 'r' to run & 'e' to terminate) "<<endl;
-                        cin>>k;
+                      k='r';
+                        //cin>>k;
                     }
                 }
                 fetch.get(isb,rFile);
@@ -483,11 +493,14 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 void findLabels(string inputFileName, vector<string> &labelNames, vector<int> &labelLineNumber){
-    ifstream iFile(inputFileName.c_str());
+    ifstream iFile("C:/Users/K.m.C/Documents/Project/input1.txt");
     if(iFile.is_open()){
         int lineNo = 0;
         string line;
+       // cout<<"Hi\n";
         while(getline(iFile,line)) {
+           // cout<<"HEllo\n";
+//            cout<<line<<endl;
             lineNo++;
             size_t found = line.find(':');
             if(found != string::npos){
@@ -570,6 +583,11 @@ void updateISB(InterStateBuffers &isb){
     isb.insTypeE = isb.insTypeD;
     isb.insTypeD = isb.insType;
 
+    isb.instructionW = isb.instructionM;
+        isb.instructionM = isb.instructionE;
+        isb.instructionE = isb.instructionD;
+        isb.instructionD = isb.instruction;
+
     isb.isjalrW = isb.isjalrM;
     isb.isjalrM = isb.isjalrE;
     isb.isjalrE = isb.isjalrD;
@@ -613,6 +631,8 @@ void updateIfStall(InterStateBuffers &isb){
     isb.wblocE = -1;
     isb.insTypeW = isb.insTypeM;
     isb.insTypeM = isb.insTypeE;
+    isb.instructionW = isb.instructionM;
+     isb.instructionM = isb.instructionE;
     isb.returnAddW = isb.returnAddM;
     isb.returnAddM = isb.returnAddE;
     isb.isjalrW = isb.isjalrM;
