@@ -154,6 +154,7 @@ class Fetch {
 	void get(InterStateBuffers & buf, Registry_File regs/*,int i*/) {
 		buf.IR.writeBitset ( mem_map[buf.PC]);
 		buf.insType = itype_map[ buf.PC ]; // Instype and new intructions fetch completed
+	//	buf.instruction = ins_map[ buf.PC ];
 		
 		if (buf.enablePipe) {
 			hazardType = detectControlHazards(buf);
