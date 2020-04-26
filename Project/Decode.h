@@ -264,6 +264,8 @@ class Decode{
                 }
                 else{
                     stallA = false;
+                    ibs.from = "RZ";
+                    ibs.to = "RA";
                     ibs.RA.writeInt(ibs.RZ.readInt());
                 }
             }
@@ -278,6 +280,8 @@ class Decode{
             if(ibs.enableDF == true){
                 // for general instruction, no load exceptions are here
                 stallA = false;
+                ibs.from = "RY";
+                 ibs.to = "RA";
                 ibs.RA.writeInt(ibs.RY.readInt());
             }
             // if only pipelining is true
@@ -288,6 +292,8 @@ class Decode{
         }
         else{
             stallA = false;
+            ibs.from = "locA";
+            ibs.to = "RA";
             ibs.RA.writeInt(regFile.readInt(locA));
         }
 
@@ -304,6 +310,8 @@ class Decode{
                     }
                     else{
                         stallB = false;
+                        ibs.from = "RZ";
+                        ibs.to = "RB";
                         ibs.RB.writeInt(ibs.RZ.readInt());
                     }
                 }
@@ -317,6 +325,8 @@ class Decode{
                 ibs.dataHazardNumber++;
                 if(ibs.enableDF == true){
                     stallB = false;
+                    ibs.from = "RY";
+                    ibs.to = "RB";
                     ibs.RB.writeInt(ibs.RY.readInt());
                 }
                 else{
@@ -388,6 +398,8 @@ class Decode{
                     }
                     else{
                         stallC = false;
+                        ibs.from = "RZ";
+                    ibs.to = "RMD";
                         ibs.RMD.writeInt(ibs.RZ.readInt());
                     }
                 }
@@ -400,6 +412,8 @@ class Decode{
                 ibs.dataHazardNumber++;
                 if(ibs.enableDF == true){
                     stallC = false;
+                    ibs.from = "RY";
+                    ibs.to = "RMD";
                     ibs.RMD.writeInt(ibs.RY.readInt());
                 }
                 else{
