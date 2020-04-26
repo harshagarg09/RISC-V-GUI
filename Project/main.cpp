@@ -23,8 +23,6 @@
 #include"InterStateBuffers.h"
 #include"Assembler.h"
 #include<string>
-#include<Qfile>
-#include<QTextStream>
 
 using namespace std;
 
@@ -79,6 +77,7 @@ int main(int argc, char *argv[])
         ifstream iFile("C:/Users/K.m.C/Documents/Project/input1.txt", ios :: in);
         ofstream oFile("C:/Users/K.m.C/Documents/Project/machineCode.txt");
         ofstream oFile2("C:/Users/K.m.C/Documents/Project/basicCode.txt");
+
 
         cout<<"\n::::::::::  RISC V SIMULATOR :::::::::::::\n\n"<<endl;
 
@@ -261,12 +260,13 @@ int main(int argc, char *argv[])
         }
 
     // If pipeline is enabled with data forwarding
+         ofstream oFile3("C:/Users/K.m.C/Documents/Project/GUI.txt", ios::app);
         if(isb.enablePipe && isb.enableDF){
             bool end = false;
             int i = 0,j=0;
             while(1){
                 i++;
-
+                //oFile3<<i<<endl;
                 isb.isMispred = false;
                 if(end)
                     j++;
@@ -278,13 +278,17 @@ int main(int argc, char *argv[])
                         fetch.get(isb,rFile);
                         if(!isb.hazard_type) iag.update(isb);
                         else iag.jumpPC(isb,isb.branch_address);
+                        oFile3<<isb.instruction<<";"<<" "<<";"<<" "<<";"<<" "<<";"<<" "<<endl;
                     }
+                    else
+                       oFile3<<isb.instruction<<";"<<" "<<";"<<" "<<";"<<" "<<";"<<" "<<endl; 
                     updateISB(isb);
                 }
                 else if(i==2) {
                     decode.decoder(isb,rFile);
                     if(isb.stall){
-                        updateIfStall(isb);
+                       oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<" "<<";"<<" "<<";"<<" "<<endl;
+                       updateIfStall(isb);
                         continue;
                     }
                     updateAfterDecoder(isb);
@@ -294,16 +298,21 @@ int main(int argc, char *argv[])
                             iag.jumpPC(isb, isb.branch_address);
                         }
                         fetch.get(isb,rFile);
+                        oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<" "<<";"<<" "<<";"<<" "<<endl;
                         updateISB(isb);
                         if(!isb.hazard_type) iag.update(isb);
                         else iag.jumpPC(isb,isb.branch_address);
                     }
+                    else
+                        oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<" "<<";"<<" "<<";"<<" "<<endl;
                     if(end)	updateISB(isb);
+
                 }
                 else if(i==3) {
                     if(!isb.stall) alu.compute(isb);
                     decode.decoder(isb,rFile);
                     if(isb.stall){
+                        oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<isb.instructionE<<";"<<" "<<";"<<" "<<endl;
                         updateIfStall(isb);
                         continue;
                     }
@@ -314,20 +323,29 @@ int main(int argc, char *argv[])
                             iag.jumpPC(isb, isb.branch_address);
                         }
                         fetch.get(isb,rFile);
+                        oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<isb.instructionE<<";"<<" "<<";"<<" "<<endl;
                         updateISB(isb);
                         if(!isb.hazard_type) iag.update(isb);
                         else iag.jumpPC(isb,isb.branch_address);
                     }
+                    else
+                       oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<isb.instructionE<<";"<<" "<<";"<<" "<<endl;
                     if(end)	updateISB(isb);
+
                 }
                 else if(i==4) {
+
                     memory(isb, memAccess, muxy);
                     if(!isb.stall) alu.compute(isb);
                     decode.decoder(isb,rFile);
+
                     if(isb.stall){
+
+                         oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<isb.instructionE<<";"<<isb.instructionM<<";"<<" "<<endl;
                         updateIfStall(isb);
-                        continue;
+                         continue;
                     }
+
                     updateAfterDecoder(isb);
                     if(isb.isMispred) iag.jumpPC(isb,isb.nextPC);
                     if(!end){
@@ -335,11 +353,16 @@ int main(int argc, char *argv[])
                             iag.jumpPC(isb, isb.branch_address);
                         }
                         fetch.get(isb,rFile);
+                        cout<<"HEllo4\n";
+                        oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<isb.instructionE<<";"<<isb.instructionM<<";"<<" "<<endl;
                         updateISB(isb);
                         if(!isb.hazard_type) iag.update(isb);
                         else iag.jumpPC(isb,isb.branch_address);
                     }
+                    else
+                        oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<isb.instructionE<<";"<<isb.instructionM<<";"<<" "<<endl;
                     if(end)	updateISB(isb);
+
                 }
                 else{
                     writeBack(isb, regUpdate, rFile);
@@ -347,6 +370,7 @@ int main(int argc, char *argv[])
                     if(!isb.stall) alu.compute(isb);
                     decode.decoder(isb,rFile);
                     if(isb.stall){
+                        oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<isb.instructionE<<";"<<isb.instructionM<<";"<<isb.instructionW<<endl;
                         updateIfStall(isb);
                         continue;
                     }
@@ -357,11 +381,15 @@ int main(int argc, char *argv[])
                             iag.jumpPC(isb, isb.branch_address);
                         }
                         fetch.get(isb,rFile);
+                        oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<isb.instructionE<<";"<<isb.instructionM<<";"<<isb.instructionW<<endl;
                         updateISB(isb);
                         if(!isb.hazard_type) iag.update(isb);
                         else iag.jumpPC(isb,isb.branch_address);
                     }
+                    else
+                       oFile3<<isb.instruction<<";"<<isb.instructionD<<";"<<isb.instructionE<<";"<<isb.instructionM<<";"<<isb.instructionW<<endl;
                     if(end)	updateISB(isb);
+
                 }
                 if(isb.IR.readInt() == 0 )
                     end = true;
@@ -374,10 +402,10 @@ int main(int argc, char *argv[])
             cout<<" Summary :\n";
             printSummary(isb);
         }
-
+                oFile3.close();
         // If pipeline is enabled without data forwarding
         if(isb.enablePipe && !isb.enableDF){
-            bool end = false, skipExecute = false;
+            bool end = false;
             int i = 0,j=0;
             while(1){
                 i++;
@@ -569,6 +597,7 @@ void writeBack(InterStateBuffers &isb, RegUpdate &regUpdate, Registry_File &rFil
 }
 
 void updateISB(InterStateBuffers &isb){
+
     isb.wblocW = isb.wblocM;
     isb.wblocM = isb.wblocE;
     isb.wblocE = isb.wblocD;
@@ -587,7 +616,6 @@ void updateISB(InterStateBuffers &isb){
         isb.instructionM = isb.instructionE;
         isb.instructionE = isb.instructionD;
         isb.instructionD = isb.instruction;
-
     isb.isjalrW = isb.isjalrM;
     isb.isjalrM = isb.isjalrE;
     isb.isjalrE = isb.isjalrD;
@@ -626,17 +654,21 @@ void updateAfterDecoder(InterStateBuffers &isb){
 }
 
 void updateIfStall(InterStateBuffers &isb){
+
     isb.wblocW = isb.wblocM;
     isb.wblocM = isb.wblocE;
     isb.wblocE = -1;
     isb.insTypeW = isb.insTypeM;
     isb.insTypeM = isb.insTypeE;
+
     isb.instructionW = isb.instructionM;
      isb.instructionM = isb.instructionE;
+
     isb.returnAddW = isb.returnAddM;
     isb.returnAddM = isb.returnAddE;
     isb.isjalrW = isb.isjalrM;
     isb.isjalrM = isb.isjalrE;
     isb.isMemW = isb.isMemM;
     isb.isMemM = isb.isMemE;
+
 }
