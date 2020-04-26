@@ -123,7 +123,10 @@ class InterStateBuffers{
             stall  = false;
             hazard_type = 0;
             dataHazardNumber = 0;
-
+            
+            from=";
+             to=";
+            
             wblocW = -1;
             wblocM = -1;
             wblocE = -1;
