@@ -60,7 +60,9 @@ class InterStateBuffers{
         int hazard_type; /* 0 No Branch , 1 Jal ,  2 Jalr ,3 branch */
         int branch_address_def;
         int branch_address;
-
+        
+        string from,to;
+    
         int insTypeD,insTypeE,insTypeM,insTypeW;
         string instructionD,instructionE,instructionM,instructionW;
         int isjalrD,isjalrE,isjalrM,isjalrW;
