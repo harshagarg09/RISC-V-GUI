@@ -16,8 +16,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    dialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    secdialog.cpp \
+    thirddialog.cpp
 
 HEADERS += \
     ../CA_RISCV_PROJECT-working/InterStateBuffers.h \
@@ -38,10 +41,17 @@ HEADERS += \
     SType.h \
     UJType.h \
     UType.h \
-    mainwindow.h
+    dialog.h \
+    mainwindow.h \
+    secdialog.h \
+    thirddialog.h
 
 FORMS += \
-    mainwindow.ui
+    dialog.ui \
+    mainwindow.ui \
+    secdialog.ui \
+    secwindow.ui \
+    thirddialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
