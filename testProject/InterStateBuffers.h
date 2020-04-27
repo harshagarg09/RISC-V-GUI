@@ -51,11 +51,14 @@ class InterStateBuffers{
         string ALU_OP;
         bool isjalr, isMem;
 
+        string from,to,fromDataHazard;
+
         // For stalling
         bool stall;
         int numStall;
         int totalCycles;
         int lines;
+
 
         int hazard_type; /* 0 No Branch , 1 Jal ,  2 Jalr ,3 branch */
         int branch_address_def;
@@ -113,6 +116,9 @@ class InterStateBuffers{
             write_back_location = -1;
             lines = 0;
 
+            from="";
+            to="";
+            fromDataHazard="";
             enablePipe = true;
             enableDF = true;
             printRegFile = false;
