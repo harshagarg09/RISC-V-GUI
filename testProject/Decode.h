@@ -258,12 +258,16 @@ class Decode{
         if(locA == ibs.pWrite && ibs.pWrite!=0 && ibs.enablePipe == true){
             // if pipelining and data forwarding is true
             ibs.dataHazardNumber++;
+             ibs.fromDataHazard=ibs.pInst;
+
             if(ibs.enableDF == true){
                 if(ibs.pInst == "lw" || ibs.pInst == "lb" || ibs.pInst == "lh"){
                     stallA = true;
                 }
                 else{
                     stallA = false;
+                    ibs.from="RZ";
+                    ibs.to="RA";
                     ibs.RA.writeInt(ibs.RZ.readInt());
                 }
             }
@@ -275,9 +279,13 @@ class Decode{
         }
         else if(locA == ibs.ppWrite && ibs.ppWrite != 0 && ibs.enablePipe == true){
             ibs.dataHazardNumber++;
+            ibs.fromDataHazard=ibs.ppInst;
+
             if(ibs.enableDF == true){
                 // for general instruction, no load exceptions are here
                 stallA = false;
+                ibs.from="RY";
+                ibs.to="RA";
                 ibs.RA.writeInt(ibs.RY.readInt());
             }
             // if only pipelining is true
@@ -298,12 +306,16 @@ class Decode{
         if(insType == 1 || insType ==3){
             if(locB == ibs.pWrite && ibs.pWrite !=0 && ibs.enablePipe == true){
                 ibs.dataHazardNumber++;
+                ibs.fromDataHazard=ibs.pInst;
+
                 if(ibs.enableDF == true){
                     if(ibs.pInst == "lw" || ibs.pInst == "lb" || ibs.pInst == "lh"){
                         stallB = true;
                     }
                     else{
                         stallB = false;
+                        ibs.from="RZ";
+                        ibs.to="RB";
                         ibs.RB.writeInt(ibs.RZ.readInt());
                     }
                 }
@@ -315,8 +327,12 @@ class Decode{
             }
             else if(locB == ibs.ppWrite && ibs.ppWrite != 0 && ibs.enablePipe == true){
                 ibs.dataHazardNumber++;
+                ibs.fromDataHazard=ibs.ppInst;
+
                 if(ibs.enableDF == true){
                     stallB = false;
+                    ibs.from="RY";
+                    ibs.to="RB";
                     ibs.RB.writeInt(ibs.RY.readInt());
                 }
                 else{
@@ -382,12 +398,16 @@ class Decode{
         if(insType == 4){
             if(locC == ibs.pWrite && ibs.pWrite !=0 && ibs.enablePipe == true){
                 ibs.dataHazardNumber++;
+                ibs.fromDataHazard=ibs.pInst;
+
                 if(ibs.enableDF == true){
                     if(ibs.pInst == "lw" || ibs.pInst == "lb" || ibs.pInst == "lh"){
                         stallC = true;
                     }
                     else{
                         stallC = false;
+                        ibs.from="RZ";
+                        ibs.to="RMD";
                         ibs.RMD.writeInt(ibs.RZ.readInt());
                     }
                 }
@@ -398,8 +418,12 @@ class Decode{
             }
             else if(locC == ibs.ppWrite && ibs.ppWrite !=0 && ibs.enablePipe == true){
                 ibs.dataHazardNumber++;
+                ibs.fromDataHazard=ibs.ppInst;
+
                 if(ibs.enableDF == true){
                     stallC = false;
+                    ibs.from="RY";
+                    ibs.to="RMD";
                     ibs.RMD.writeInt(ibs.RY.readInt());
                 }
                 else{
@@ -488,6 +512,7 @@ class Decode{
             }
             else{
                 //Sab sahi hai bero
+
                 ibs.isMispred = false;
             }
 
