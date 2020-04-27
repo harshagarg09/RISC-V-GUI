@@ -378,7 +378,7 @@ void secDialog::on_pushButton_clicked()
     }
     else{
         writeBack(isb, regUpdate, rFile);
-        memory(isb, memAccess, muxy);
+        memory(isb, *memAccess, muxy);
         if(!isb.stall) alu.compute(isb);
         decode.decoder(isb,rFile);
         if(isb.stall){
