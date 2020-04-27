@@ -1,47 +1,17 @@
 #include "mainwindow.h"
 
 #include <QApplication>
-#include<iostream>
-#include<fstream>
-#include<sstream>
-#include<string.h>
-#include<bitset>
-#include"RType.h"
-#include"IType.h"
-#include"SBType.h"
-#include"SType.h"
-#include"UJType.h"
-#include"UType.h"
-#include"ALU.h"
-#include"IAG.h"
-#include"Decode.h"
-#include"Fetch.h"
-#include"MUX_Y.h"
-#include"RegistryFile.h"
-#include"RegUpdate.h"
-#include"MemoryAccess.h"
-#include"InterStateBuffers.h"
-#include"Assembler.h"
 #include<string>
 #include<QFile>
 #include<QTextStream>
 
 using namespace std;
 
-void findLabels(string,vector<string>&,vector<int>&);
-void memory(InterStateBuffers &,MemoryAccess & ,MUX_Y &);
-void writeBack(InterStateBuffers &, RegUpdate &, Registry_File &);
-void print(int i, InterStateBuffers &, Registry_File &);
-void updateISB(InterStateBuffers &);
-void updateAfterDecoder(InterStateBuffers &);
-void updateIfStall(InterStateBuffers &);
-void printSummary(InterStateBuffers &);
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    RType rTypeInsObj;
+ /*   RType rTypeInsObj;
         IType iTypeInsObj;
         SBType sbTypeInsObj;
       SType sTypeInsObj;
@@ -159,7 +129,7 @@ int main(int argc, char *argv[])
         oFile.close();
         oFile2.close();
 
-   /*     Registry_File rFile;
+        Registry_File rFile;
         Fetch fetch;
         MUX_Y muxy;
         Decode decode;
@@ -492,6 +462,7 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+/*
 void findLabels(string inputFileName, vector<string> &labelNames, vector<int> &labelLineNumber){
     ifstream iFile("C:/Users/hp/Downloads/RISC-V-GUI-master/Project/input1.txt");
     if(iFile.is_open()){
@@ -515,7 +486,7 @@ void findLabels(string inputFileName, vector<string> &labelNames, vector<int> &l
     }
     iFile.close();
 }
-/*
+
 void memory(InterStateBuffers &isb,MemoryAccess &memAccess ,MUX_Y &muxy){
     if(!isb.enablePipe){
             if(isb.isMem == true){
