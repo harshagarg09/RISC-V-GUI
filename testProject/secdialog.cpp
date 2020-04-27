@@ -270,10 +270,7 @@ void secDialog::paintEvent(QPaintEvent *event)
 }
 void secDialog::on_pushButton_clicked()
 {
-    isb.from="";
-    isb.to="";
     i++;
-
     isb.isMispred = false;
     if(end)
         j++;
@@ -289,6 +286,7 @@ void secDialog::on_pushButton_clicked()
         return;
 
     }
+
     if(i==1){
         if(!end){
             fetch.get(isb,rFile);
@@ -298,16 +296,12 @@ void secDialog::on_pushButton_clicked()
 
         }
         else
-       printOnTextEdit();
+            printOnTextEdit();
+
         updateISB(isb);
     }
     else if(i==2) {
         decode.decoder(isb,rFile);
-        if(isb.from!="" && isb.to!="")
-        {
-            //paintEvent(event);
-          //  paint();
-        }
         if(isb.stall){
             printOnTextEdit();
             updateIfStall(isb);
@@ -320,7 +314,6 @@ void secDialog::on_pushButton_clicked()
                 iag.jumpPC(isb, isb.branch_address);
             }
             fetch.get(isb,rFile);
-
             printOnTextEdit();
 
             updateISB(isb);
@@ -335,11 +328,6 @@ void secDialog::on_pushButton_clicked()
     else if(i==3) {
         if(!isb.stall) alu.compute(isb);
         decode.decoder(isb,rFile);
-        if(isb.from!="" && isb.to!="")
-        {
-           // paint();
-            //paintEvent(event);
-        }
         if(isb.stall){
             printOnTextEdit();
             updateIfStall(isb);
@@ -366,11 +354,6 @@ void secDialog::on_pushButton_clicked()
         memory(isb, *memAccess, muxy);
         if(!isb.stall) alu.compute(isb);
         decode.decoder(isb,rFile);
-        if(isb.from!="" && isb.to!="")
-        {
-           // paint();
-           // paintEvent(event);
-        }
         if(isb.stall){
             printOnTextEdit();
             updateIfStall(isb);
@@ -384,27 +367,20 @@ void secDialog::on_pushButton_clicked()
             }
             fetch.get(isb,rFile);
             printOnTextEdit();
-
             updateISB(isb);
             if(!isb.hazard_type) iag.update(isb);
             else iag.jumpPC(isb,isb.branch_address);
         }
         if(end)	{
             printOnTextEdit();
-
             updateISB(isb);
         }
     }
     else{
         writeBack(isb, regUpdate, rFile);
-        memory(isb, *memAccess, muxy);
+        memory(isb, memAccess, muxy);
         if(!isb.stall) alu.compute(isb);
         decode.decoder(isb,rFile);
-        if(isb.from!="" && isb.to!="")
-        {
-           // paint();
-            //paintEvent(event);
-        }
         if(isb.stall){
             printOnTextEdit();
             updateIfStall(isb);
@@ -429,8 +405,8 @@ void secDialog::on_pushButton_clicked()
     }
     if(isb.IR.readInt() == 0 )
         end = true;
- print(i, isb,rFile);
- this->repaint();
+    print(i,isb,rFile);
+
 }
 
 void secDialog::printOnTextEdit(){
