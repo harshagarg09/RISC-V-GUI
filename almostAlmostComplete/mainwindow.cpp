@@ -154,10 +154,21 @@ void MainWindow::generateOutputFile(){
                     insType = 6;
                 }
                 else {
-                    cout<<"Hello\n";
                     cout<<"ERROR !! Instuction not identified : "<<line<<endl;
                     machineCode = bitset<32>(0);
                     insType = -1;
+                }
+                int error=1;
+                for(int i=0;i<32;i++)
+                {	if(machineCode[i]!=-1)
+                        error=0;
+                }
+                if(error){
+                    iFile.close();
+                    oFile.close();
+                    oFile2.close();
+                    cout<<"ERROR !! Some parameters missing... :"<<line<<endl;
+                    return 0;
                 }
                 oFile <<lineNo<<" "<< machineCode <<" "<< insType << endl;
                 oFile2 <<lineNo<<" "<< line << endl;
