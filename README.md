@@ -25,10 +25,5 @@ Phase 3:-
 If all the errors are not cleared, Error message will be written on the terminal and complete machine code will not be available.
 Our assembler accepts instructions without bracket for offset 
 
-lb,lh,lw assumes the offset of 8
-
-Ex: lw x10, 10(x20) can be accepted as lw x10 x20 10 by your assembler.
-
-
 Contribution:
 -GUI : Harsha and Ishika
