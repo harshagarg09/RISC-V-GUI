@@ -58,6 +58,7 @@ class InterStateBuffers{
         int numStall;
         int totalCycles;
         int lines;
+        int instFetchNumber;
 
 
         int hazard_type; /* 0 No Branch , 1 Jal ,  2 Jalr ,3 branch */
@@ -73,6 +74,9 @@ class InterStateBuffers{
 
         vector<bool> btb;
         int mispredNumber;
+        int aluInstNumber;
+		int ctrlInstNumber;
+		int dataInstNumber;
         int dataHazardNumber;
         bool isMispred;
         int nextPC;
@@ -102,9 +106,7 @@ class InterStateBuffers{
                     // Control
         bool printISBspecific;	// E/D printing for a specific instruction, handle later
                     // Control, decode(maybe)
-        int conflict_misses;
-        int cold_misses;
-        int capacity_misses;
+        
 
         InterStateBuffers(){
             PC = 1;
@@ -115,7 +117,8 @@ class InterStateBuffers{
             isMem = false;
             write_back_location = -1;
             lines = 0;
-
+            instFetchNumber = 0;
+            
             from="";
             to="";
             fromDataHazard="";
@@ -161,7 +164,10 @@ class InterStateBuffers{
             mispredNumber = 0;
             isMispred = false;
             nextPC = 0;
-
+            aluInstNumber = 0;
+			ctrlInstNumber = 0;
+			dataInstNumber = 0;
+            
             pWrite = 0;
             ppWrite = 0;
             numStall = 0;
