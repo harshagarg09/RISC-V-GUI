@@ -276,17 +276,17 @@ void Dialog::print(int i, InterStateBuffers &isb, Registry_File &rFile){
 }
 
 void Dialog::printSummary(InterStateBuffers &isb){
-    cout<<" Total Cycles \t\t\t:\t"<<isb.totalCycles<<endl;
-    cout<<" Total Instructions \t\t:\t"<<isb.lines<<endl;
-    cout<<" CPI \t\t\t\t:\t"<<((float)isb.totalCycles/isb.lines)<<endl;
-    // cout<<" Total Data Transfer Instructions :\t"<<<<endl;
-    // cout<<" Total ALU Instructions :\t"<<<<endl;
-    // cout<<" Total Control Instructions :\t"<<<<endl;
-    cout<<" Total Stalls \t\t\t:\t"<<isb.numStall + isb.mispredNumber*2<<endl;
-    cout<<" Number of Data Hazards :\t"<<isb.dataHazardNumber<<endl;
-    // cout<<" Number of Control Hazards :\t"<<<<endl;
-    cout<<" Total Branch Misprediction \t:\t"<<isb.mispredNumber<<endl;
-    cout<<" Stalls due to Data Hazard :\t"<<isb.numStall<<endl;
-    cout<<" Stalls due to Control Hazard :\t"<<isb.mispredNumber*2<<endl;
+	cout<<" Total Cycles \t\t\t\t\t:\t"<<isb.totalCycles<<endl;
+	cout<<" Total Instructions in Code \t\t\t:\t"<<isb.lines<<endl;
+	cout<<" Total Instructions Fetched \t\t\t:\t"<<isb.instFetchNumber<<endl;
+	cout<<" CPI \t\t\t\t\t\t:\t"<<((float)isb.totalCycles/isb.instFetchNumber)<<endl;
+	cout<<" Total Data Transfer Instructions Fetched \t:\t"<<isb.dataInstNumber<<endl;
+	cout<<" Total ALU Instructions Fetched \t\t:\t"<<isb.aluInstNumber<<endl;
+	cout<<" Total Control Instructions Fetched\t\t:\t"<<isb.ctrlInstNumber<<endl;
+	cout<<" Total Stalls \t\t\t\t\t:\t"<<isb.numStall + isb.mispredNumber<<endl;
+	cout<<" Number of Data Hazards \t\t\t:\t"<<isb.dataHazardNumber<<endl;
+	cout<<" Number of Control Hazards \t\t\t:\t"<<isb.mispredNumber<<endl;
+	cout<<" Total Branch Misprediction \t\t\t:\t"<<isb.mispredNumber<<endl;
+	cout<<" Stalls due to Data Hazard \t\t\t:\t"<<isb.numStall<<endl;
+	cout<<" Stalls due to Control Hazard \t\t\t:\t"<<isb.mispredNumber<<endl;
 }
-
