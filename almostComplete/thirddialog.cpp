@@ -32,6 +32,7 @@ thirdDialog::thirdDialog(QWidget *parent) :
     decode.initialise();
     isb.enablePipe = true;
     isb.enableDF = true;
+    isb.init_btb();
 }
 
 thirdDialog::~thirdDialog()
@@ -117,8 +118,20 @@ void thirdDialog::paintEvent(QPaintEvent *event)
 
     QPainter  rect10(this);
     rect10.drawRect(QRect(490,480,60,40));
+/*
+    QPainter line17(this);
+    line17.drawLine(380,600,480,600);
 
-    QPainter line12(this);
+     QPainter line18(this);
+     line18.drawLine(480,600,480,450);
+
+     QPainter line19(this);
+     line19.drawLine(480,450,500,450);
+
+     QPainter line20(this);
+     line20.drawLine(500,450,500,480);
+*/
+     QPainter line12(this);
      line12.drawLine(350,620,350,690);
 
      QPainter line13(this);
@@ -135,6 +148,40 @@ void thirdDialog::paintEvent(QPaintEvent *event)
 
     QPainter line24(this);
     line24.drawLine(370,290,370,310);
+
+    QPainter line17(this);
+    line17.drawLine(380,600,480,600);
+
+     QPainter line18(this);
+     line18.drawLine(480,600,480,450);
+
+     QPainter line19(this);
+     line19.drawLine(480,450,500,450);
+
+     QPainter line20(this);
+     line20.drawLine(500,450,500,480);
+     QPainter line25(this);
+      line25.drawLine(350,510,440,510);
+
+      QPainter line26(this);
+       line26.drawLine(440,510,440,300);
+
+       QPainter line27(this);
+       line27.drawLine(440,300,400,300);
+
+      QPainter line28(this);
+       line28.drawLine(400,300,400,310);
+       QPainter line29(this);
+        line29.drawLine(350,510,200,510);
+
+        QPainter line30(this);
+          line30.drawLine(200,510,200,300);
+
+          QPainter line31(this);
+           line31.drawLine(200,300,290,300);
+
+          QPainter line32(this);
+           line32.drawLine(290,300,290,310);
 
      for(int i=0;i<isb.from.size();i++){
      if(isb.from[i]=="RZ"&&isb.to[i]=="RA")
@@ -284,41 +331,41 @@ void thirdDialog::paintEvent(QPaintEvent *event)
          QPainter line24(this);
          line24.drawLine(370,290,370,310);
       }
-         if(isb.from=="RY"&&isb.to=="RMD")
-      {
-          //line17, line 18, line 19 , line 20
-          QPainter line17(this);
-          QPen linepen(Qt::red);
-          linepen.setWidth(5);
-          line17.setPen(linepen);
-         line17.drawLine(380,600,480,600);
+      if(isb.from[i]=="RY"&&isb.to[i]=="RMD")
+           {
+               //line17, line 18, line 19 , line 20
+               QPainter line17(this);
+               QPen linepen(Qt::red);
+               linepen.setWidth(5);
+               line17.setPen(linepen);
+              line17.drawLine(380,600,480,600);
 
-          QPainter line18(this);
-          line18.setPen(linepen);
-          line18.drawLine(480,600,480,450);
+               QPainter line18(this);
+               line18.setPen(linepen);
+               line18.drawLine(480,600,480,450);
 
-          QPainter line19(this);
-          line19.setPen(linepen);
-        line19.drawLine(480,450,500,450);
+               QPainter line19(this);
+               line19.setPen(linepen);
+             line19.drawLine(480,450,500,450);
 
-           QPainter line20(this);
-          line20.setPen(linepen);
-        line20.drawLine(500,450,500,480);
-      }
-      else
-      {
-          QPainter line17(this);
-          line17.drawLine(380,600,480,600);
-      
-           QPainter line18(this);
-           line18.drawLine(480,600,480,450);
-      
-           QPainter line19(this);
-           line19.drawLine(480,450,500,450);
-      
-           QPainter line20(this);
-           line20.drawLine(500,450,500,480);
-      }
+                QPainter line20(this);
+               line20.setPen(linepen);
+             line20.drawLine(500,450,500,480);
+           }
+           else
+           {
+               QPainter line17(this);
+               line17.drawLine(380,600,480,600);
+
+                QPainter line18(this);
+                line18.drawLine(480,600,480,450);
+
+                QPainter line19(this);
+                line19.drawLine(480,450,500,450);
+
+                QPainter line20(this);
+                line20.drawLine(500,450,500,480);
+           }
 }
 
 }
@@ -349,6 +396,10 @@ void thirdDialog::on_pushButton_clicked()
         if(!end){
             fetch.get(isb,rFile);
             if(!isb.hazard_type) iag.update(isb);
+            else if(isb.hazard_type == 3){
+                                    if(isb.btb[isb.PC-1]) iag.jumpPC(isb,isb.branch_address);
+                                    else iag.update(isb);
+                                }
             else iag.jumpPC(isb,isb.branch_address);
             printOnTextEdit();
 
@@ -377,6 +428,10 @@ void thirdDialog::on_pushButton_clicked()
 
             updateISB(isb);
             if(!isb.hazard_type) iag.update(isb);
+            else if(isb.hazard_type == 3){
+                                    if(isb.btb[isb.PC-1]) iag.jumpPC(isb,isb.branch_address);
+                                    else iag.update(isb);
+                                }
             else iag.jumpPC(isb,isb.branch_address);
         }
         if(end)	{
@@ -403,6 +458,10 @@ void thirdDialog::on_pushButton_clicked()
             printOnTextEdit();
             updateISB(isb);
             if(!isb.hazard_type) iag.update(isb);
+            else if(isb.hazard_type == 3){
+                                    if(isb.btb[isb.PC-1]) iag.jumpPC(isb,isb.branch_address);
+                                    else iag.update(isb);
+                                }
             else iag.jumpPC(isb,isb.branch_address);
         }
         if(end)	{
@@ -431,6 +490,10 @@ void thirdDialog::on_pushButton_clicked()
 
             updateISB(isb);
             if(!isb.hazard_type) iag.update(isb);
+            else if(isb.hazard_type == 3){
+                                    if(isb.btb[isb.PC-1]) iag.jumpPC(isb,isb.branch_address);
+                                    else iag.update(isb);
+                                }
             else iag.jumpPC(isb,isb.branch_address);
         }
         if(end)	{
@@ -460,6 +523,10 @@ void thirdDialog::on_pushButton_clicked()
             printOnTextEdit();
             updateISB(isb);
             if(!isb.hazard_type) iag.update(isb);
+            else if(isb.hazard_type == 3){
+                                    if(isb.btb[isb.PC-1]) iag.jumpPC(isb,isb.branch_address);
+                                    else iag.update(isb);
+                                }
             else iag.jumpPC(isb,isb.branch_address);
         }
         if(end)	{
@@ -615,12 +682,21 @@ void thirdDialog::print(int i, InterStateBuffers &isb, Registry_File &rFile){
 
         if(!isb.from.empty()){
         ui->countDH->setText(QString::fromStdString(to_string(isb.dataHazardNumber)));
-       // ui->fromDH->setText(QString::fromStdString(isb.fromDataHazard));
+        ui->DFpaths->setText("");
+
+        for(int i=0;i<isb.from.size();i++){
+            ui->DFpaths->append("From "+QString::fromStdString(isb.from[i]) + " to "+QString::fromStdString(isb.to[i]));
+
+        }
+      //  ui->countDH->append(QString::fromStdString(to_string(isb.dataHazardNumber)));
+
+        // ui->fromDH->setText(QString::fromStdString(isb.fromDataHazard));
         ui->toDH->setText(QString::fromStdString(isb.instructionE));
 }
         else{
             ui->countDH->setText(QString::fromStdString(""));
            // ui->fromDH->setText(QString::fromStdString(isb.fromDataHazard));
+            ui->DFpaths->setText("");
             ui->toDH->setText(QString::fromStdString(""));
         }
 
@@ -630,18 +706,19 @@ void thirdDialog::print(int i, InterStateBuffers &isb, Registry_File &rFile){
 }
 
 void thirdDialog::printSummary(InterStateBuffers &isb){
-    cout<<" Total Cycles \t\t\t:\t"<<isb.totalCycles<<endl;
-    cout<<" Total Instructions \t\t:\t"<<isb.lines<<endl;
-    cout<<" CPI \t\t\t\t:\t"<<((float)isb.totalCycles/isb.lines)<<endl;
-    // cout<<" Total Data Transfer Instructions :\t"<<<<endl;
-    // cout<<" Total ALU Instructions :\t"<<<<endl;
-    // cout<<" Total Control Instructions :\t"<<<<endl;
-    cout<<" Total Stalls \t\t\t:\t"<<isb.numStall + isb.mispredNumber*2<<endl;
-    cout<<" Number of Data Hazards :\t"<<isb.dataHazardNumber<<endl;
-    // cout<<" Number of Control Hazards :\t"<<<<endl;
-    cout<<" Total Branch Misprediction \t:\t"<<isb.mispredNumber<<endl;
-    cout<<" Stalls due to Data Hazard :\t"<<isb.numStall<<endl;
-    cout<<" Stalls due to Control Hazard :\t"<<isb.mispredNumber*2<<endl;
+    cout<<" Total Cycles \t\t\t\t\t:\t"<<isb.totalCycles<<endl;
+        cout<<" Total Instructions in Code \t\t\t:\t"<<isb.lines<<endl;
+        cout<<" Total Instructions Fetched \t\t\t:\t"<<isb.instFetchNumber<<endl;
+        cout<<" CPI \t\t\t\t\t\t:\t"<<((float)isb.totalCycles/isb.instFetchNumber)<<endl;
+        cout<<" Total Data Transfer Instructions Fetched \t:\t"<<isb.dataInstNumber<<endl;
+        cout<<" Total ALU Instructions Fetched \t\t:\t"<<isb.aluInstNumber<<endl;
+        cout<<" Total Control Instructions Fetched\t\t:\t"<<isb.ctrlInstNumber<<endl;
+        cout<<" Total Stalls \t\t\t\t\t:\t"<<isb.numStall + isb.mispredNumber<<endl;
+        cout<<" Number of Data Hazards \t\t\t:\t"<<isb.dataHazardNumber<<endl;
+        cout<<" Number of Control Hazards \t\t\t:\t"<<isb.mispredNumber<<endl;
+        cout<<" Total Branch Misprediction \t\t\t:\t"<<isb.mispredNumber<<endl;
+        cout<<" Stalls due to Data Hazard \t\t\t:\t"<<isb.numStall<<endl;
+        cout<<" Stalls due to Control Hazard \t\t\t:\t"<<isb.mispredNumber<<endl;
 }
 
 void thirdDialog::updateAfterDecoder(InterStateBuffers &isb){
