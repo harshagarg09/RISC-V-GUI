@@ -12,83 +12,153 @@
 
 using namespace std;
 
-class IType {
-    private:
-    vector <string> instructions;    // instruction : 0->31 | opcode (7) | rd (5) | funct3 | rs1(5) | rs2 (5) | funct7 |
-    vector <string> opcode;
-    vector <string> funct3;
+class IType
+{
+	private:
+		vector <string> instructions;
+		vector <string> opcode;
+		vector <string> funct3;
+		int error = 0;
+		//For extracting all the integers that is the value of destination register, source register and Immediate 
+		vector<int> extract(string str)
+		{	//immediate/rs1/funct3/rd/opcode
+			//12/5/3/5/7
+				vector<int> result;
+				int sum=0;
+				int count =0;
+				for(int i=0;i<str.size();i++)
+				{
+					sum=0;
+					int negative = 0;
+					int positive = 0;
+					
+					if(str[i]=='-') //For Negative Number
+					{	
+						if(str[i-1]=='x')
+						error = -1;
+						
+						negative = 1;
+						i = i+1;
+						while(i<str.size()&&isdigit(str[i]))
+						{
+							int p = str[i]-'0';
+							sum = (sum*10)+p;
+							i=i+1;
+						}
+						sum=sum*(-1);
+					}
+					else//For positive Number
+					{	
+						
+						if(i<str.size()&&isdigit(str[i]))
+						{
+							if(str[i-1]=='x'&&count==2)
+							error = -1;
+							positive = 1;
+						}
+						while(i<str.size()&&isdigit(str[i]))
+						{
+							int p = str[i]-'0';
+							sum = (sum*10)+p;
+							i=i+1;
+						}
+					}
+					if(positive==1||negative==1)//If found any number then push it into the result
+					{
+						result.push_back(sum);
+						count = count+1;
+					}
+				}
+			return result;
+		}
 
-    /* Function extracts the all the integers in an instruction basically */
-    /* for ex : lw x2,42(x3) : will extract 2,24,3 i.e parameters needed for MC generation.*/
-    vector <int> extractint(string str) { // recieves a string and extracts all the integers and returns them in a list (vector)
-        vector <int> result;
+	public:
+	
+		void initialise(string filename)
+		{
+			ifstream ifile(filename.c_str());
+			string line;
+			while(getline(ifile,line))//Getting all the instructions
+			{
+				stringstream ss(line);
+				string token;
+				ss>>token;
+				instructions.push_back(token);
+				ss>>token;
+				opcode.push_back(token);
+				ss>>token;
+				funct3.push_back(token);
+			}
+		}
 
-        int sum,currentint, sum2;
-        for(int strIndex = 0 ; strIndex < str.size() ; strIndex++) {
+		bool isPresent(string command) 
+		{
+			stringstream ss(command);
+			string ins1;
+			ss >> ins1;
+			vector <string> :: iterator it = find(instructions.begin(),instructions.end(),ins1);
+			if(it == instructions.end())
+			return false;
+			else
+			return true;
+  		 }
 
-            sum = 0;
-            bool intfound = 0, intfound2 = 0;
+		bitset<32> decode(string instruction)
+		{
+			bitset<32>Machine_code;
+			bitset<12>immediate;
+			bitset<5>rd;
+			bitset<5>rs1;
 
-            while(strIndex < str.size() && isdigit(str[strIndex])) {
-                currentint = str[strIndex] - '0';
-                sum = sum*10 + currentint;
-                strIndex++;
-                intfound = 1;
-            }
+			vector<int>result1 = extract(instruction);
+			
+			stringstream ins(instruction);
+			string instruct,funct3_1,opcode_1;
 
-            if(str[strIndex] == '-'){
-                sum2 = 0;
-                strIndex++;
-                while(strIndex < str.size() && isdigit(str[strIndex])){
-                    currentint = str[strIndex] - '0';
-                    sum2 = sum2*10 + currentint;
-                    strIndex++;
-                    intfound2 = 1;
-                }
-                sum2 = sum2*(-1);
-            }
+			ins>>instruct;
+			//Finding our instruction in the file 
+			int index = find(instructions.begin(),instructions.end(),instruct)-instructions.begin();
+			//extarcting opcode and funct3 of our instruction 
+			opcode_1 = opcode[index];
+			funct3_1 = funct3[index];
+			if(error==-1||result1.size()!=3)
+			{
+				for(int i=0;i<32;i++)
+					Machine_code[i]=-1;
+				error=0;
+				return Machine_code;
+			}
+			if(result1[2]<-2048||result1[2]>2047 || result1[0]<0 ||result1[0]>31 || result1[1]<0 || result1[1]>31)
+			{
+				for(int i=0;i<32;i++)
+					Machine_code[i]=-1;
+				return Machine_code;
+			}
+			rd = result1[0];
+			rs1 = result1[1];
+			immediate = result1[2];
+			
+			
+			
+			
+			for(int i=0;i<7;i++)
+				Machine_code[i] = (opcode_1[opcode_1.size()-1-i] == '0') ? 0 : 1;
 
-            if(intfound)
-                result.push_back(sum);
+			for(int i=0;i<5;i++)
+				Machine_code[i+7] = rd[i];
 
-            if(intfound2)
-                result.push_back(sum2);
-        }
+			for(int i=0;i<3;i++)
+				Machine_code[i+12]=(funct3_1[funct3_1.size()-i-1] == '0') ? 0 : 1;
 
-        return result; //returning vector of extracted parameters
-    }
+			for(int i=0;i<5;i++)
+				Machine_code[i+15]=rs1[i];
 
-    public:
+			for(int i=0;i<12;i++)
+				Machine_code[i+20]=immediate[i];
 
-    // initialise the vectors with their respective values from the input file.
-    void initialise (string filename) {
-        ifstream ifile(filename);
-        string line;
-        while(getline(ifile,line)) {
-            stringstream ss(line);
-            string token;
-            ss >> token;
-            instructions.push_back(token);
-            ss >> token;
-            opcode.push_back(token);
-            ss >> token;
-            funct3.push_back(token);
-        }
-    }
-
-    // checks if given command is present in the list of S Type instructions.
-    bool isPresent(string command) {
-        stringstream ss(command);
-        string ins;
-        ss >> ins;
-        vector <string> :: iterator it = find(instructions.begin(),instructions.end(),ins);
-        if(it == instructions.end())
-        return false;
-        else
-        return true;
-    }
-
-
+			return Machine_code;
+		}
+};
     bitset <32> decode (string instruction) {
         /*Edit this*/
         bitset <32> MachineCode;
