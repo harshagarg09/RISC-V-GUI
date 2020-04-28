@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>secDialog</class>
+ <widget class="QDialog" name="secDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1409</width>
+    <height>470</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>80</y>
+     <width>1041</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Fetch</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="textEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Decode</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="textEdit_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Execute</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="textEdit_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Memory</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="textEdit_4">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Write Back</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="textEdit_5">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>150</y>
+     <width>80</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Run</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>740</x>
+     <y>200</y>
+     <width>571</width>
+     <height>336</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_7">
+    <item>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="title">
+       <string>Interstate Registers</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>RA</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>RY</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>RZ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>RB</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_14">
+           <property name="text">
+            <string>RM</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="regRA"/>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="regRB"/>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="regRM"/>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="regRZ"/>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="regRY"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <widget class="QLabel" name="label_15">
+        <property name="text">
+         <string>Registers</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="lineWidth">
+         <number>1</number>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>263</width>
+           <height>910</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <layout class="QFormLayout" name="formLayout_5">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_21">
+              <property name="text">
+               <string>x0</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="0">
+             <widget class="QLabel" name="label_22">
+              <property name="text">
+               <string>x14</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="0">
+             <widget class="QLabel" name="label_23">
+              <property name="text">
+               <string>x13</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="label_24">
+              <property name="text">
+               <string>x8</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="0">
+             <widget class="QLabel" name="label_25">
+              <property name="text">
+               <string>x11</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="0">
+             <widget class="QLabel" name="label_26">
+              <property name="text">
+               <string>x12</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLabel" name="label_27">
+              <property name="text">
+               <string>x9</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="0">
+             <widget class="QLabel" name="label_28">
+              <property name="text">
+               <string>x10</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_29">
+              <property name="text">
+               <string>x1</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_30">
+              <property name="text">
+               <string>x7</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="label_31">
+              <property name="text">
+               <string>x6</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_32">
+              <property name="text">
+               <string>x5</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_33">
+              <property name="text">
+               <string>x4</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_34">
+              <property name="text">
+               <string>x3</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_35">
+              <property name="text">
+               <string>sp2</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="regx0"/>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="regx1"/>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="regx3"/>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="regx4"/>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLineEdit" name="regx5"/>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLineEdit" name="regx6"/>
+            </item>
+            <item row="7" column="1">
+             <widget class="QLineEdit" name="regx7"/>
+            </item>
+            <item row="8" column="1">
+             <widget class="QLineEdit" name="regx8"/>
+            </item>
+            <item row="9" column="1">
+             <widget class="QLineEdit" name="regx9"/>
+            </item>
+            <item row="10" column="1">
+             <widget class="QLineEdit" name="regx10"/>
+            </item>
+            <item row="11" column="1">
+             <widget class="QLineEdit" name="regx11"/>
+            </item>
+            <item row="12" column="1">
+             <widget class="QLineEdit" name="regx12"/>
+            </item>
+            <item row="13" column="1">
+             <widget class="QLineEdit" name="regx13"/>
+            </item>
+            <item row="14" column="1">
+             <widget class="QLineEdit" name="regx14"/>
+            </item>
+            <item row="15" column="0">
+             <widget class="QLabel" name="label_36">
+              <property name="text">
+               <string>x15</string>
+              </property>
+             </widget>
+            </item>
+            <item row="19" column="0">
+             <widget class="QLabel" name="label_37">
+              <property name="text">
+               <string>x19</string>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="0">
+             <widget class="QLabel" name="label_38">
+              <property name="text">
+               <string>x18</string>
+              </property>
+             </widget>
+            </item>
+            <item row="17" column="0">
+             <widget class="QLabel" name="label_39">
+              <property name="text">
+               <string>x17</string>
+              </property>
+             </widget>
+            </item>
+            <item row="16" column="0">
+             <widget class="QLabel" name="label_40">
+              <property name="text">
+               <string>x16</string>
+              </property>
+             </widget>
+            </item>
+            <item row="31" column="0">
+             <widget class="QLabel" name="label_41">
+              <property name="text">
+               <string>x31</string>
+              </property>
+             </widget>
+            </item>
+            <item row="30" column="0">
+             <widget class="QLabel" name="label_42">
+              <property name="text">
+               <string>x30</string>
+              </property>
+             </widget>
+            </item>
+            <item row="29" column="0">
+             <widget class="QLabel" name="label_43">
+              <property name="text">
+               <string>x29</string>
+              </property>
+             </widget>
+            </item>
+            <item row="28" column="0">
+             <widget class="QLabel" name="label_44">
+              <property name="text">
+               <string>x28</string>
+              </property>
+             </widget>
+            </item>
+            <item row="27" column="0">
+             <widget class="QLabel" name="label_45">
+              <property name="text">
+               <string>x27</string>
+              </property>
+             </widget>
+            </item>
+            <item row="26" column="0">
+             <widget class="QLabel" name="label_46">
+              <property name="text">
+               <string>x26</string>
+              </property>
+             </widget>
+            </item>
+            <item row="25" column="0">
+             <widget class="QLabel" name="label_47">
+              <property name="text">
+               <string>x25</string>
+              </property>
+             </widget>
+            </item>
+            <item row="24" column="0">
+             <widget class="QLabel" name="label_48">
+              <property name="text">
+               <string>x24</string>
+              </property>
+             </widget>
+            </item>
+            <item row="23" column="0">
+             <widget class="QLabel" name="label_49">
+              <property name="text">
+               <string>x23</string>
+              </property>
+             </widget>
+            </item>
+            <item row="22" column="0">
+             <widget class="QLabel" name="label_50">
+              <property name="text">
+               <string>x22</string>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="0">
+             <widget class="QLabel" name="label_51">
+              <property name="text">
+               <string>x21</string>
+              </property>
+             </widget>
+            </item>
+            <item row="20" column="0">
+             <widget class="QLabel" name="label_52">
+              <property name="text">
+               <string>x20</string>
+              </property>
+             </widget>
+            </item>
+            <item row="26" column="1">
+             <widget class="QLineEdit" name="regx26"/>
+            </item>
+            <item row="25" column="1">
+             <widget class="QLineEdit" name="regx25"/>
+            </item>
+            <item row="24" column="1">
+             <widget class="QLineEdit" name="regx24"/>
+            </item>
+            <item row="22" column="1">
+             <widget class="QLineEdit" name="regx22"/>
+            </item>
+            <item row="23" column="1">
+             <widget class="QLineEdit" name="regx23"/>
+            </item>
+            <item row="21" column="1">
+             <widget class="QLineEdit" name="regx21"/>
+            </item>
+            <item row="20" column="1">
+             <widget class="QLineEdit" name="regx20"/>
+            </item>
+            <item row="27" column="1">
+             <widget class="QLineEdit" name="regx27"/>
+            </item>
+            <item row="28" column="1">
+             <widget class="QLineEdit" name="regx28"/>
+            </item>
+            <item row="29" column="1">
+             <widget class="QLineEdit" name="regx29"/>
+            </item>
+            <item row="30" column="1">
+             <widget class="QLineEdit" name="regx30"/>
+            </item>
+            <item row="31" column="1">
+             <widget class="QLineEdit" name="regx31"/>
+            </item>
+            <item row="15" column="1">
+             <widget class="QLineEdit" name="regx15"/>
+            </item>
+            <item row="16" column="1">
+             <widget class="QLineEdit" name="regx16"/>
+            </item>
+            <item row="17" column="1">
+             <widget class="QLineEdit" name="regx17"/>
+            </item>
+            <item row="18" column="1">
+             <widget class="QLineEdit" name="regx18"/>
+            </item>
+            <item row="19" column="1">
+             <widget class="QLineEdit" name="regx19"/>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="regx2"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
