@@ -112,6 +112,10 @@ class Fetch {
     }
 
     public:
+    vector <string> datainstructions;
+	vector <string> ctrlinstructions;
+	vector <string> aluinstructions;
+    
     int getHazardType () {
         return hazardType;
     }
@@ -144,7 +148,7 @@ class Fetch {
             i++;
         }
 
-
+        initCountInst();
     }
 
     void updateBuffer(InterStateBuffers & buf) {
@@ -164,29 +168,74 @@ class Fetch {
             setBrachAddress(buf, regs);
             updateBuffer(buf);
         }
-        /*ifstream pFile (HMEM_SRC);
-        string print_file_name = "printsummary.txt";
-        ofstream oFile(print_file_name.c_str(),ios::app);
+        countInst(buf,"C:/Users/hp/Downloads/RISC-V-GUI-master/Project/basicCode.txt");
+		buf.instFetchNumber++;
+        
+    }
+    void initCountInst(){
+		string datafile = "datainst.txt";
+		string ctrlfile = "ctrlinst.txt";
+		string alufile = "aluinst.txt";
+		ifstream iFiledata("C:/Users/hp/Downloads/RISC-V-GUI-master/Project/datainst.txt", ios::in);
+		ifstream iFilectrl("C:/Users/hp/Downloads/RISC-V-GUI-master/Project/ctrlinst.txt", ios::in);
+		ifstream iFilealu("C:/Users/hp/Downloads/RISC-V-GUI-master/Project/aluinst.txt", ios::in);
+		
 
         string line;
-        int pp=0;
-        while(getline (pFile , line ) ){
-            if(pp==i)
-            {
-                string pcNo, hexmc;
-                stringstream ss (line);
-                //ss >>pcNo>> hexmc;
-                oFile<<line<<";";
-                //cout<<"\t\tFetch Instruction "<<hexmc<<" from address "<<pcNo<<endl;
-                pFile.close();
-                oFile.close();
-                pp++;
-                break;
-            }
-            else
-                pp++;
-        }*/
-    }
+        
+        while(getline(iFiledata,line)) {
+            stringstream ss(line);
+            string token;
+            ss >> token;
+            datainstructions.push_back(token);
+        }
+		while(getline(iFilectrl,line)) {
+            stringstream ss(line);
+            string token;
+            ss >> token;
+            ctrlinstructions.push_back(token);
+        }
+		while(getline(iFilealu,line)) {
+            stringstream ss(line);
+            string token;
+            ss >> token;
+            aluinstructions.push_back(token);
+        }
+		iFiledata.close();
+		iFilectrl.close();
+		iFilealu.close();
+	}
+
+	void countInst(InterStateBuffers &isb, string basic){
+
+		string line;
+		ifstream file(basic, ios::in);
+		while(getline(file,line)){
+			stringstream ss(line);
+			string token;
+			ss >> token;
+			if(atoi(token.c_str())!=isb.PC) continue;
+			else{
+				ss >> token;
+				// cout<<token<<"\t";
+				vector <string> :: iterator it1 = find(datainstructions.begin(),datainstructions.end(),token);
+				if(it1 != datainstructions.end()){
+					isb.dataInstNumber++;
+				}
+				vector <string> :: iterator it2 = find(ctrlinstructions.begin(),ctrlinstructions.end(),token);
+				if(it2 != ctrlinstructions.end()){
+					isb.ctrlInstNumber++;
+				}
+				vector <string> :: iterator it3 = find(aluinstructions.begin(),aluinstructions.end(),token);
+				if(it3 != aluinstructions.end()){
+					isb.aluInstNumber++;
+				}
+				// cout<<isb.dataInstNumber<<"\t"<<isb.ctrlInstNumber<<"\t"<<isb.aluInstNumber<<"\n";
+				}
+		
+		}
+	file.close();
+}
 
 };
 #endif // FETCH_H
