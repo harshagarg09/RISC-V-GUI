@@ -130,7 +130,26 @@ void thirdDialog::paintEvent(QPaintEvent *event)
      QPainter line20(this);
      line20.drawLine(500,450,500,480);
 
-     if(isb.from=="RZ"&&isb.to=="RA")
+     QPainter line12(this);
+     line12.drawLine(350,620,350,690);
+
+     QPainter line13(this);
+     line13.drawLine(100,690,350,690);
+
+     QPainter line21(this);
+     line21.drawLine(100,295,300,295);
+
+     QPainter line22(this);
+     line22.drawLine(300,295,300,310);
+
+     QPainter line23(this);
+     line23.drawLine(100,290,370,290);
+
+    QPainter line24(this);
+    line24.drawLine(370,290,370,310);
+
+     for(int i=0;i<isb.from.size();i++){
+     if(isb.from[i]=="RZ"&&isb.to[i]=="RA")
       {
           QPainter line29(this);
           QPen linepen(Qt::red);
@@ -165,7 +184,7 @@ void thirdDialog::paintEvent(QPaintEvent *event)
              QPainter line32(this);
               line32.drawLine(290,300,290,310);
       }
-       if(isb.from=="RZ"&&isb.to=="RB")
+       if(isb.from[i]=="RZ"&&isb.to[i]=="RB")
       {
           //line 25,line 26,line 27,line 28
           QPainter line25(this);
@@ -201,10 +220,10 @@ void thirdDialog::paintEvent(QPaintEvent *event)
             line28.drawLine(400,300,400,310);
 
       }
-      if(isb.from=="RY")
+      if(isb.from[i]=="RY")
       {
           //line 13,line 12
-          if(isb.to=="RA")
+          if(isb.to[i]=="RA")
           {
               //line 21,line 22
               QPainter line21(this);
@@ -226,7 +245,7 @@ void thirdDialog::paintEvent(QPaintEvent *event)
                QPainter line22(this);
                line22.drawLine(300,295,300,310);
           }
-          if(isb.to=="RB")
+          if(isb.to[i]=="RB")
           {
               //line 23,line 24
               QPainter line23(this);
@@ -264,18 +283,29 @@ void thirdDialog::paintEvent(QPaintEvent *event)
 
           QPainter line13(this);
           line13.drawLine(100,690,350,690);
+
+          QPainter line21(this);
+          line21.drawLine(100,295,300,295);
+
+          QPainter line22(this);
+          line22.drawLine(300,295,300,310);
+
+          QPainter line23(this);
+          line23.drawLine(100,290,370,290);
+
+         QPainter line24(this);
+         line24.drawLine(370,290,370,310);
       }
-
-
+}
 
 }
 
 void thirdDialog::on_pushButton_clicked()
 {
-    isb.from="";
-    isb.to="";
+    isb.from.clear();
+    isb.to.clear();
     i++;
-    isb.fromDataHazard="";
+   // isb.fromDataHazard="";
 
     isb.isMispred = false;
     if(end)
@@ -558,11 +588,19 @@ void thirdDialog::print(int i, InterStateBuffers &isb, Registry_File &rFile){
         ui->regRM->setText(QString::fromStdString(to_string(isb.RM.readInt())));
         ui->regRZ->setText(QString::fromStdString(to_string(isb.RZ.readInt())));
         ui->regRY->setText(QString::fromStdString(to_string(isb.RY.readInt())));
-if(isb.fromDataHazard!=""){
+
+
+        if(!isb.from.empty()){
         ui->countDH->setText(QString::fromStdString(to_string(isb.dataHazardNumber)));
-        ui->fromDH->setText(QString::fromStdString(isb.fromDataHazard));
+       // ui->fromDH->setText(QString::fromStdString(isb.fromDataHazard));
         ui->toDH->setText(QString::fromStdString(isb.instructionE));
 }
+        else{
+            ui->countDH->setText(QString::fromStdString(""));
+           // ui->fromDH->setText(QString::fromStdString(isb.fromDataHazard));
+            ui->toDH->setText(QString::fromStdString(""));
+        }
+
 
 
     cout<<endl;
