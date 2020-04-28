@@ -138,30 +138,7 @@ void secDialog::paintEvent(QPaintEvent *event)
     QPainter line24(this);
     line24.drawLine(370,290,370,310);
 
-     for(int i=0;i<isb.from.size();i++){
-     if(isb.from[i]=="RZ"&&isb.to[i]=="RA")
-      {
-          QPainter line29(this);
-          QPen linepen(Qt::red);
-          linepen.setWidth(5);
-          line29.setPen(linepen);
-          line29.drawLine(350,510,200,510);
-
-          QPainter line30(this);
-          line30.setPen(linepen);
-          line30.drawLine(200,510,200,300);
-
-          QPainter line31(this);
-          line31.setPen(linepen);
-          line31.drawLine(200,300,290,300);
-
-           QPainter line32(this);
-          line32.setPen(linepen);
-         line32.drawLine(290,300,290,310);
-          //line 29,line 30,line 31,line 32
-      }
-      else
-      {
+     
           QPainter line29(this);
            line29.drawLine(350,510,200,510);
 
@@ -173,30 +150,7 @@ void secDialog::paintEvent(QPaintEvent *event)
 
              QPainter line32(this);
               line32.drawLine(290,300,290,310);
-      }
-       if(isb.from[i]=="RZ"&&isb.to[i]=="RB")
-      {
-          //line 25,line 26,line 27,line 28
-          QPainter line25(this);
-          QPen linepen(Qt::red);
-          linepen.setWidth(5);
-          line25.setPen(linepen);
-         line25.drawLine(350,510,440,510);
-
-          QPainter line26(this);
-          line26.setPen(linepen);
-          line26.drawLine(440,510,440,300);
-
-          QPainter line27(this);
-          line27.setPen(linepen);
-          line27.drawLine(440,300,400,300);
-
-           QPainter line28(this);
-          line28.setPen(linepen);
-          line28.drawLine(400,300,400,310);
-      }
-      else
-      {
+     
           QPainter line25(this);
            line25.drawLine(350,510,440,510);
 
@@ -209,65 +163,6 @@ void secDialog::paintEvent(QPaintEvent *event)
            QPainter line28(this);
             line28.drawLine(400,300,400,310);
 
-      }
-      if(isb.from[i]=="RY")
-      {
-          //line 13,line 12
-          if(isb.to[i]=="RA")
-          {
-              //line 21,line 22
-              QPainter line21(this);
-              QPen linepen(Qt::red);
-              linepen.setWidth(5);
-              line21.setPen(linepen);
-              line21.drawLine(100,295,300,295);
-
-              QPainter line22(this);
-              line22.setPen(linepen);
-              line22.drawLine(300,295,300,310);
-
-          }
-          else
-          {
-               QPainter line21(this);
-               line21.drawLine(100,295,300,295);
-
-               QPainter line22(this);
-               line22.drawLine(300,295,300,310);
-          }
-          if(isb.to[i]=="RB")
-          {
-              //line 23,line 24
-              QPainter line23(this);
-              QPen linepen(Qt::red);
-              linepen.setWidth(5);
-              line23.setPen(linepen);
-              line23.drawLine(100,290,370,290);
-
-              QPainter line24(this);
-              line24.setPen(linepen);
-              line24.drawLine(370,290,370,310);
-          }
-          else
-          {
-               QPainter line23(this);
-               line23.drawLine(100,290,370,290);
-              QPainter line24(this);
-              line24.drawLine(370,290,370,310);
-
-          }
-          QPainter line12(this);
-          QPen linepen(Qt::red);
-          linepen.setWidth(5);
-          line12.setPen(linepen);
-          line12.drawLine(350,620,350,690);
-
-          QPainter line13(this);
-          line13.setPen(linepen);
-            line13.drawLine(100,690,350,690);
-      }
-      else
-      {
           QPainter line12(this);
           line12.drawLine(350,620,350,690);
 
@@ -285,30 +180,7 @@ void secDialog::paintEvent(QPaintEvent *event)
 
          QPainter line24(this);
          line24.drawLine(370,290,370,310);
-      }
-         if(isb.from=="RY"&&isb.to=="RMD")
-      {
-          //line17, line 18, line 19 , line 20
-          QPainter line17(this);
-          QPen linepen(Qt::red);
-          linepen.setWidth(5);
-          line17.setPen(linepen);
-         line17.drawLine(380,600,480,600);
-
-          QPainter line18(this);
-          line18.setPen(linepen);
-          line18.drawLine(480,600,480,450);
-
-          QPainter line19(this);
-          line19.setPen(linepen);
-        line19.drawLine(480,450,500,450);
-
-           QPainter line20(this);
-          line20.setPen(linepen);
-        line20.drawLine(500,450,500,480);
-      }
-      else
-      {
+    
           QPainter line17(this);
           line17.drawLine(380,600,480,600);
       
@@ -320,11 +192,7 @@ void secDialog::paintEvent(QPaintEvent *event)
       
            QPainter line20(this);
            line20.drawLine(500,450,500,480);
-      }
-
-}
-
-
+    
 }
 void secDialog::on_pushButton_clicked()
 {
