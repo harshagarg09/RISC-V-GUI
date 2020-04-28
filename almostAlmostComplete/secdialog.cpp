@@ -48,6 +48,7 @@ void secDialog::paintEvent(QPaintEvent *event)
 
        QPainter  rect(this);
        rect.drawRect(QRect(300,120,100,100));
+    rect.drawText(320,170,"Register File");
 
        QPainter line1(this);
        line1.drawLine(100,100,350,100);
@@ -63,9 +64,11 @@ void secDialog::paintEvent(QPaintEvent *event)
 
        QPainter  rect1(this);
        rect1.drawRect(QRect(300,250,30,30));
+    rect1.drawText(307,270,"RA");
 
        QPainter  rect2(this);
        rect2.drawRect(QRect(365,250,30,30));
+    rect2.drawText(372,270,"RB");
 
        QPainter line5(this);
        line5.drawLine(320,280,320,310);
@@ -75,9 +78,11 @@ void secDialog::paintEvent(QPaintEvent *event)
 
        QPainter  rect3(this);
        rect3.drawRect(QRect(280,310,50,40));
+     rect3.drawText(290,335,"MUXA");
 
        QPainter  rect4(this);
        rect4.drawRect(QRect(360,310,50,40));
+    rect4.drawText(370,335,"MUXB");
 
        QPainter line7(this);
        line7.drawLine(300,350,320,390);
@@ -87,24 +92,28 @@ void secDialog::paintEvent(QPaintEvent *event)
 
        QPainter  rect5(this);
        rect5.drawRect(QRect(300,390,100,40));
+    rect5.drawText(340,415,"ALU");
 
        QPainter line9(this);
        line9.drawLine(350,430,350,460);
 
        QPainter  rect6(this);
        rect6.drawRect(QRect(320,460,60,40));
+     rect6.drawText(340,484,"RZ");
 
        QPainter line10(this);
        line10.drawLine(350,500,350,520);
 
        QPainter  rect7(this);
        rect7.drawRect(QRect(320,520,60,40));
+    rect7.drawText(335,540,"MUXY");
 
        QPainter line11(this);
        line11.drawLine(350,560,350,580);
 
        QPainter  rect8(this);
        rect8.drawRect(QRect(320,580,60,40));
+    rect8.drawText(345,605,"RY");
 
        QPainter line14(this);
        line14.drawLine(380,295,520,295);
@@ -114,12 +123,14 @@ void secDialog::paintEvent(QPaintEvent *event)
 
        QPainter  rect9(this);
        rect9.drawRect(QRect(500,360,60,40));
+    rect9.drawText(520,385,"RM");
 
        QPainter line16(this);
        line16.drawLine(520,400,520,480);
 
        QPainter  rect10(this);
        rect10.drawRect(QRect(490,480,60,40));
+    rect10.drawText(505,505,"MUXM");
 
         QPainter line12(this);
         line12.drawLine(350,620,350,690);
