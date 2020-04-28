@@ -19,7 +19,7 @@ HOW TO RUN:-
         ./a.out
         
        GUI:-  Qt framework
-            Editor pane , Highlighting the data forwarding path, Identification of data Hazard , Identification of Control Hazard,     Register and Inter state Registers value after every cycle, Branch Predictor result, Button for without pipelining, pipelining without data forwarding, pipelining with data forwarding
+            Editor pane , Highlighting the data forwarding path, Identification of data Hazard , Identification of Control Hazard,     Register and Inter state Registers value after every cycle, Branch Predictor result, Dealing with three different cases for 1.without pipelining, 2.pipelining without data forwarding and 3.pipelining with data forwarding
 
 Phase 3:-
 If all the errors are not cleared, Error message will be written on the terminal and complete machine code will not be available.
