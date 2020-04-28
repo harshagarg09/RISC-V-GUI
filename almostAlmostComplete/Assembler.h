@@ -1,5 +1,3 @@
-#ifndef ASSMBLER_H
-#define ASSMBLER_H
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -40,7 +38,7 @@ vector <int> extractint(string str) { // recieves a string and extracts all the 
 void  assembler_initiate(MemoryAccess &memobject)
 {
     ifstream ifile("C:/Users/K.m.C/Downloads/Project/input.txt", ios :: in);
-        ofstream ofile("C:/Users/K.m.C/Downloads/Project/input1.txt",ios::out);
+            ofstream ofile("C:/Users/K.m.C/Downloads/Project/input1.txt",ios::out);
     string current;
      // matches the label to address in the memory or value it is referring to.
     map <string , int > labelLookup;
@@ -78,26 +76,17 @@ void  assembler_initiate(MemoryAccess &memobject)
         else if(start == 1){ //.data portion has started
             stringstream ss(current);
             vector <int> data;
-            bool Word = 0, byte = 0, half=0 ,dword=0, asciiz = 0;
+            bool Word = 0, byte = 0;
             string token;
             string directive;
             ss >> token;
             ss >> directive;
             if(directive == ".word"){
-                                Word = true;
-                            }
-                            else if(directive == ".byte"){
-                                byte = true;
-                            }
-                            else if(directive == ".half"){
-                                half = true;
-                            }
-                            else if(directive == ".dword"){
-                                dword = true;
-                            }
-                            else if(directive == ".asciiz"){
-                                asciiz = true;
-                            }
+                Word = true;
+            }
+            else if(directive == ".byte"){
+                byte = true;
+            }
 
 
                 if(token[token.size()-1] == ':'){
@@ -128,30 +117,6 @@ void  assembler_initiate(MemoryAccess &memobject)
                         address += 1;
                     }
                 }
-                else if(half == true){
-                                       for(int i=0; i < data.size(); i++){
-                                           memobject.writeByte(address,data[i]); //half $$$$$
-                                             //changed
-                                           address += 2;
-                                       }
-                   }
-                                       else if(dword == true){
-                                       for(int i=0; i < data.size(); i++){
-                                           memobject.writeByte(address,data[i]); //dword $$$$$
-                                             //changed
-                                           address += 8;
-                                       }
-
-                    }                   else if(asciiz == true){
-                                       for(int i=0; i < data.size(); i++){
-                                           // just assingning ascii value of that char, we will handle it while reading
-                                           memobject.writeByte(address,int(data[i])); //ascii $$$$$
-                                              //changed
-                                           address += 1;
-                                       }
-
-
-                                   }
             }
 
 
@@ -183,7 +148,7 @@ void  assembler_initiate(MemoryAccess &memobject)
 
 
 
-            if( (insname == "la" || insname == "lw" || insname == "lb") && (!isdigit(label[label.size()-1]) )){
+            if( (insname == "la" || insname == "lw" || insname == "lb") && label[label.size()-1] != ')' ){
                 ofile<<"addi "<<regname<<",x0,"<<labelLookup[label]<<endl;
                 continue;
             }
@@ -220,5 +185,3 @@ void  assembler_initiate(MemoryAccess &memobject)
     ifile.close();
 
 }
-
-#endif // ASSMBLER_H
