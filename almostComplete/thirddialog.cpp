@@ -118,19 +118,7 @@ void thirdDialog::paintEvent(QPaintEvent *event)
     QPainter  rect10(this);
     rect10.drawRect(QRect(490,480,60,40));
 
-    QPainter line17(this);
-    line17.drawLine(380,600,480,600);
-
-     QPainter line18(this);
-     line18.drawLine(480,600,480,450);
-
-     QPainter line19(this);
-     line19.drawLine(480,450,500,450);
-
-     QPainter line20(this);
-     line20.drawLine(500,450,500,480);
-
-     QPainter line12(this);
+    QPainter line12(this);
      line12.drawLine(350,620,350,690);
 
      QPainter line13(this);
@@ -295,6 +283,41 @@ void thirdDialog::paintEvent(QPaintEvent *event)
 
          QPainter line24(this);
          line24.drawLine(370,290,370,310);
+      }
+         if(isb.from=="RY"&&isb.to=="RMD")
+      {
+          //line17, line 18, line 19 , line 20
+          QPainter line17(this);
+          QPen linepen(Qt::red);
+          linepen.setWidth(5);
+          line17.setPen(linepen);
+         line17.drawLine(380,600,480,600);
+
+          QPainter line18(this);
+          line18.setPen(linepen);
+          line18.drawLine(480,600,480,450);
+
+          QPainter line19(this);
+          line19.setPen(linepen);
+        line19.drawLine(480,450,500,450);
+
+           QPainter line20(this);
+          line20.setPen(linepen);
+        line20.drawLine(500,450,500,480);
+      }
+      else
+      {
+          QPainter line17(this);
+          line17.drawLine(380,600,480,600);
+      
+           QPainter line18(this);
+           line18.drawLine(480,600,480,450);
+      
+           QPainter line19(this);
+           line19.drawLine(480,450,500,450);
+      
+           QPainter line20(this);
+           line20.drawLine(500,450,500,480);
       }
 }
 
