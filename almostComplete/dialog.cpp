@@ -1,11 +1,38 @@
+#pragma once
 #include "dialog.h"
 #include "ui_dialog.h"
+#include<QFile>
+#include<QMessageBox>
+#include "secdialog.h"
+#include<iostream>
+#include<fstream>
+#include<sstream>
+#include<string.h>
+#include<bitset>
+#include"ALU.h"
+#include"IAG.h"
+#include"Decode.h"
+#include"Fetch.h"
+#include"MUX_Y.h"
+#include"RegistryFile.h"
+#include"RegUpdate.h"
+#include"MemoryAccess.h"
+#include"InterStateBuffers.h"
+#include<string>
+#include<QTextStream>
+
+using namespace std;
+
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
+    this->count = 0;
+    decode.initialise();
+    isb.enablePipe = false;
+    isb.enableDF = false;
 }
 
 Dialog::~Dialog()
@@ -104,29 +131,7 @@ void Dialog::paintEvent(QPaintEvent *event)
      QPainter line20(this);
      line20.drawLine(500,450,500,480);
 
-  /*   if(isb.from=="RZ"&&isb.to=="RA")
-      {
-          QPainter line29(this);
-          QPen linepen(Qt::red);
-          linepen.setWidth(5);
-          line29.setPen(linepen);
-          line29.drawLine(350,510,200,510);
 
-          QPainter line30(this);
-          line30.setPen(linepen);
-          line30.drawLine(200,510,200,300);
-
-          QPainter line31(this);
-          line31.setPen(linepen);
-          line31.drawLine(200,300,290,300);
-
-           QPainter line32(this);
-          line32.setPen(linepen);
-         line32.drawLine(290,300,290,310);
-          //line 29,line 30,line 31,line 32
-      }
-      else
-      {
           QPainter line29(this);
            line29.drawLine(350,510,200,510);
 
@@ -138,30 +143,7 @@ void Dialog::paintEvent(QPaintEvent *event)
 
              QPainter line32(this);
               line32.drawLine(290,300,290,310);
-      }
-       if(isb.from=="RZ"&&isb.to=="RB")
-      {
-          //line 25,line 26,line 27,line 28
-          QPainter line25(this);
-          QPen linepen(Qt::red);
-          linepen.setWidth(5);
-          line25.setPen(linepen);
-         line25.drawLine(350,510,440,510);
 
-          QPainter line26(this);
-          line26.setPen(linepen);
-          line26.drawLine(440,510,440,300);
-
-          QPainter line27(this);
-          line27.setPen(linepen);
-          line27.drawLine(440,300,400,300);
-
-           QPainter line28(this);
-          line28.setPen(linepen);
-          line28.drawLine(400,300,400,310);
-      }
-      else
-      {
           QPainter line25(this);
            line25.drawLine(350,510,440,510);
 
@@ -174,105 +156,137 @@ void Dialog::paintEvent(QPaintEvent *event)
            QPainter line28(this);
             line28.drawLine(400,300,400,310);
 
-      }
-      if(isb.from=="RY"&&isb.to=="RA")
-      {
-          //line 13,line 12
-          if(isb.to=="RA")
-          {
-              //line 21,line 22
-              QPainter line21(this);
-              QPen linepen(Qt::red);
-              linepen.setWidth(5);
-              line21.setPen(linepen);
-              line21.drawLine(100,295,300,295);
 
-              QPainter line22(this);
-              line22.setPen(linepen);
-              line22.drawLine(300,295,300,310);
-
-          }
-          else
-          {
                QPainter line21(this);
                line21.drawLine(100,295,300,295);
 
                QPainter line22(this);
                line22.drawLine(300,295,300,310);
-          }
-          if(isb.to=="RB")
-          {
-              //line 23,line 24
-              QPainter line23(this);
-              QPen linepen(Qt::red);
-              linepen.setWidth(5);
-              line23.setPen(linepen);
-              line23.drawLine(100,290,370,290);
 
-              QPainter line24(this);
-              line24.setPen(linepen);
-              line24.drawLine(370,290,370,310);
-          }
-          else
-          {
                QPainter line23(this);
                line23.drawLine(100,290,370,290);
               QPainter line24(this);
               line24.drawLine(370,290,370,310);
 
-          }
-          QPainter line12(this);
-          QPen linepen(Qt::red);
-          linepen.setWidth(5);
-          line12.setPen(linepen);
-          line12.drawLine(350,620,350,690);
 
-          QPainter line13(this);
-          line13.setPen(linepen);
-            line13.drawLine(100,690,350,690);
-      }
-      else
-      {
           QPainter line12(this);
           line12.drawLine(350,620,350,690);
 
           QPainter line13(this);
           line13.drawLine(100,690,350,690);
-      }
 
-*/
 
 }
 
 void Dialog::on_pushButton_clicked()
 {
-    /*
+
         i++;
-        if(runStepByStep){
-            k = 'n';
-            while(k != 'r' && k != 'R'){
-                cout<<"\n RUN CYCLE NUMBER : "<<i<<" ? "<<" ( enter 'r' to run & 'e' to terminate) "<<endl;
-              k='r';
-                //cin>>k;
-            }
-        }
         fetch.get(isb,rFile);
-        if(isb.IR.readInt() == 0 || k == 'e' || k == 'E')
-            break;
+        printOnTextEdit();
+        if(isb.IR.readInt() == 0 )
+            return;
 
         decode.decoder(isb,rFile);
         alu.compute(isb);
-        memory(isb, memAccess, muxy);
+        memory(isb, *memAccess, muxy);
         writeBack(isb, regUpdate, rFile);
         iag.step(isb,alu);
         isb.resetAll();
 
         if(isb.printRegFile) print(i,isb,rFile);
 
-   // isb.totalCycles = i-1;
+    isb.totalCycles = i-1;
     cout<<"\n\n---------------- Code executed succesfully ----------------\n\n"<<endl;
     cout<<" Final register values :\n";
     rFile.print();
     cout<<" Summary :\n";
-    //printSummary(isb);*/
+    printSummary(isb);
 }
+
+
+void Dialog::printOnTextEdit(){
+
+    ui->lineEdit->setText(QString::fromStdString(isb.instruction));
+    ui->lineEdit_2->setText(QString::fromStdString(isb.instruction));
+    ui->lineEdit_3->setText(QString::fromStdString(isb.instruction));
+    ui->lineEdit_4->setText(QString::fromStdString(isb.instruction));
+    ui->lineEdit_5->setText(QString::fromStdString(isb.instruction));
+
+}
+void Dialog::memory(InterStateBuffers &isb,MemoryAccess &memAccess ,MUX_Y &muxy){
+    if(!isb.enablePipe){
+            if(isb.isMem == true){
+                if(isb.insType == 4){
+                    memAccess.writeWord(isb);
+                    muxy.MUX_Y_SELECT = 1;
+                }
+                else {
+                    memAccess.readWord(isb);
+                    muxy.MUX_Y_SELECT = 2; // for getting register val from memory
+                }
+        }
+        else if(isb.isjalr == true || isb.insType == 5){
+            muxy.MUX_Y_SELECT = 3;
+        }
+        else
+            muxy.MUX_Y_SELECT = 1;
+        isb.RY.writeInt(muxy.output(isb));
+    }
+    else{
+        if(isb.isMemM == true){
+                if(isb.insTypeM == 4){
+                    memAccess.writeWord(isb);
+                    muxy.MUX_Y_SELECT = 1;
+                }
+                else {
+                    memAccess.readWord(isb);
+                    muxy.MUX_Y_SELECT = 2; // for getting register val from memory
+                }
+        }
+        else if(isb.isjalrM == true || isb.insTypeM == 5){
+            muxy.MUX_Y_SELECT = 3;
+        }
+        else
+            muxy.MUX_Y_SELECT = 1;
+        isb.RY.writeInt(muxy.output(isb));
+    }
+}
+
+void Dialog::writeBack(InterStateBuffers &isb, RegUpdate &regUpdate, Registry_File &rFile){
+    if(!isb.enablePipe){
+        if(isb.write_back_location != -1){
+            regUpdate.update(isb,rFile, isb.write_back_location);
+        }
+    }
+    else{
+        if(isb.wblocW != -1){
+            regUpdate.update(isb,rFile, isb.wblocW);
+        }
+    }
+}
+
+void Dialog::print(int i, InterStateBuffers &isb, Registry_File &rFile){
+    cout<<"===== < Cycle "<<i<<" > ====="<<endl;
+   // if(isb.printRegFile)
+        rFile.print();
+   // if(isb.printISB)
+        isb.printAll();
+    cout<<endl;
+}
+
+void Dialog::printSummary(InterStateBuffers &isb){
+    cout<<" Total Cycles \t\t\t:\t"<<isb.totalCycles<<endl;
+    cout<<" Total Instructions \t\t:\t"<<isb.lines<<endl;
+    cout<<" CPI \t\t\t\t:\t"<<((float)isb.totalCycles/isb.lines)<<endl;
+    // cout<<" Total Data Transfer Instructions :\t"<<<<endl;
+    // cout<<" Total ALU Instructions :\t"<<<<endl;
+    // cout<<" Total Control Instructions :\t"<<<<endl;
+    cout<<" Total Stalls \t\t\t:\t"<<isb.numStall + isb.mispredNumber*2<<endl;
+    cout<<" Number of Data Hazards :\t"<<isb.dataHazardNumber<<endl;
+    // cout<<" Number of Control Hazards :\t"<<<<endl;
+    cout<<" Total Branch Misprediction \t:\t"<<isb.mispredNumber<<endl;
+    cout<<" Stalls due to Data Hazard :\t"<<isb.numStall<<endl;
+    cout<<" Stalls due to Control Hazard :\t"<<isb.mispredNumber*2<<endl;
+}
+
